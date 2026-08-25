@@ -2,53 +2,86 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Properties — Dreamwell</title>
+<title>Property Grid — Dreamwell</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>body{font-family:Inter,sans-serif}</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{accent:'#19CF79',heading:'#152046',body:'#636363',muted:'#F5F7FA'},fontFamily:{heading:['Golos Text','sans-serif'],body:['Inter','sans-serif']}}}}</script>
+<style>body{font-family:'Inter',sans-serif;background:#F5F7FA;color:#636363}h1,h2,h3{font-family:'Golos Text',sans-serif;color:#152046}</style>
 </head>
-<body class="bg-zinc-50 text-zinc-900">
-<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-zinc-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-lg bg-zinc-900 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">Dreamwell</span></a>
-    <nav class="hidden md:flex gap-6 text-sm"><a href="index.html" class="text-zinc-600">Home</a><a href="properties.html" class="font-medium">Listing</a><a href="admin/index.html" class="text-violet-600 font-medium">Admin</a></nav>
+<body class="bg-[#F5F7FA]">
+<header class="sticky top-0 z-40 bg-white shadow-[0_4px_20px_rgba(21,32,70,.07)]">
+  <div class="max-w-[1620px] mx-auto px-4 lg:px-6 h-[86px] flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><span class="h-9 w-9 rounded-lg bg-accent grid place-items-center text-white"><i class="fa-solid fa-house"></i></span><span class="font-bold text-[22px] text-heading" style="font-family:'Golos Text'">Dreamwell</span></a>
+    <nav class="hidden xl:flex items-center gap-7 text-[15px] font-medium text-heading"><a href="index.html" class="hover:text-accent">Home</a><a href="properties.html" class="text-accent">Listing</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a><a href="fa/index.html">فارسی</a></nav>
+    <div class="flex items-center gap-3"><a href="admin/index.html" class="hidden md:inline-flex px-6 py-2.5 rounded-[7px] bg-accent text-white text-sm font-medium">Add Property</a><a href="index.html" class="text-sm">← Home</a></div>
   </div>
 </header>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="flex items-center gap-2 text-sm text-zinc-500 mb-6"><a href="index.html">Home</a><span>/</span><span class="text-zinc-900 font-medium">Grid With Left Filter</span></div>
-  <div class="flex flex-col lg:flex-row gap-6">
-    <aside class="lg:w-80 shrink-0">
-      <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-5 sticky top-20">
-        <div class="flex items-center justify-between"><h3 class="font-semibold">Find your home</h3><button onclick="resetFilters()" class="text-xs text-zinc-500 hover:text-zinc-900">Reset</button></div>
-        <div><label class="text-xs font-medium">Location</label><select id="fLoc" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any Location</option></select></div>
-        <div class="grid grid-cols-2 gap-3">
-          <div><label class="text-xs font-medium">Type</label><select id="fType" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any Type</option><option>House</option><option>Apartment</option><option>Villa</option><option>Townhouse</option><option>Office</option></select></div>
-          <div><label class="text-xs font-medium">Status</label><select id="fStatus" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any Status</option><option>For Rent</option><option>For Sale</option></select></div>
+
+<div class="max-w-[1620px] mx-auto px-4 lg:px-6 py-8">
+  <div class="flex items-center gap-2 text-sm"><a href="index.html" class="hover:text-accent">Home</a><span>/</span><span class="text-heading font-medium">Grid With Left Filter</span></div>
+  <div class="flex flex-col lg:flex-row gap-6 mt-6">
+    <!-- Sidebar -->
+    <aside class="lg:w-[340px] shrink-0">
+      <div class="bg-white rounded-[15px] p-6 shadow-[0_4px_20px_rgba(21,32,70,.06)] sticky top-[100px]">
+        <div class="flex items-center justify-between"><h3 class="font-semibold text-heading">Find your home</h3><button onclick="resetFilters()" class="text-xs text-accent font-medium">Reset</button></div>
+        <div class="mt-5 space-y-4">
+          <div><label class="text-xs font-semibold text-heading">Location</label><select id="fLoc" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm bg-white"><option value="">Any Location</option></select></div>
+          <div class="grid grid-cols-2 gap-3">
+            <div><label class="text-xs font-semibold text-heading">Type</label><select id="fType" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm bg-white"><option value="">Any Type</option><option>House</option><option>Apartment</option><option>Villa</option><option>Townhouse</option><option>Office</option><option>Bungalow</option><option>Loft</option></select></div>
+            <div><label class="text-xs font-semibold text-heading">Status</label><select id="fStatus" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm bg-white"><option value="">Any Status</option><option>For Rent</option><option>For Sale</option></select></div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div><label class="text-xs font-semibold text-heading">Bedrooms</label><select id="fBeds" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm bg-white"><option value="">Any</option><option>1</option><option>2</option><option>3</option></select></div>
+            <div><label class="text-xs font-semibold text-heading">Bathrooms</label><select id="fBaths" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm bg-white"><option value="">Any</option><option>1</option><option>2</option><option>3</option></select></div>
+          </div>
+          <div><label class="text-xs font-semibold text-heading">Search</label><input id="fSearch" placeholder="Title or city..." class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"></div>
+          <div><label class="text-xs font-semibold text-heading">Max Price: <span id="priceLabel" class="text-accent">$1M+</span></label><input id="fPrice" type="range" min="0" max="1000000" step="5000" value="1000000" class="w-full mt-2 accent-accent"></div>
         </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div><label class="text-xs font-medium">Bedrooms</label><select id="fBeds" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any</option><option>1</option><option>2</option><option>3</option></select></div>
-          <div><label class="text-xs font-medium">Bathrooms</label><select id="fBaths" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any</option><option>1</option><option>2</option><option>3</option></select></div>
+        <div class="mt-6 rounded-xl bg-[#F5F7FA] p-4 text-center">
+          <div class="h-10 w-10 mx-auto rounded-full bg-accent text-white grid place-items-center"><i class="fa-solid fa-headset"></i></div><div class="mt-2 font-semibold text-heading text-sm">Need help?</div><div class="text-xs mt-1">+44 454 7800 112</div>
         </div>
-        <div><label class="text-xs font-medium">Search</label><input id="fSearch" placeholder="Title or city..." class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"></div>
-        <div><label class="text-xs font-medium">Max Price: <span id="priceLabel">1M+</span></label><input id="fPrice" type="range" min="0" max="1000000" step="5000" value="1000000" class="w-full mt-2"></div>
       </div>
     </aside>
     <div class="flex-1">
-      <div class="flex items-center justify-between mb-4">
-        <p id="count" class="text-sm text-zinc-600">Showing 0 results</p>
-        <select id="sort" class="rounded-xl border border-zinc-200 px-3 py-2 text-sm"><option value="default">Sort By Default</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select>
+      <div class="bg-white rounded-xl px-4 py-3 flex items-center justify-between shadow-sm">
+        <p id="count" class="text-sm text-body">Showing 0 results</p>
+        <div class="flex items-center gap-3"><span class="hidden sm:inline text-xs">Sort By</span><select id="sort" class="rounded-full border border-zinc-200 px-4 py-2 text-sm bg-white"><option value="default">Default</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></div>
       </div>
-      <div id="grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      <div id="grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6"></div>
+      <div id="pagination" class="flex items-center justify-center gap-2 mt-8"></div>
     </div>
   </div>
 </div>
+
+<footer class="mt-16 bg-[#0D0D0D] text-zinc-400">
+  <div class="max-w-[1620px] mx-auto px-4 lg:px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-3 text-xs border-t border-white/10">
+    <div>© 2024 Dreamwell. All rights reserved.</div><a href="index.html" class="text-accent">← Back to Home</a>
+  </div>
+</footer>
+
 <script src="assets/app.js"></script>
 <script>
-const els = {loc:document.getElementById('fLoc'),type:document.getElementById('fType'),status:document.getElementById('fStatus'),beds:document.getElementById('fBeds'),baths:document.getElementById('fBaths'),search:document.getElementById('fSearch'),price:document.getElementById('fPrice'),priceLabel:document.getElementById('priceLabel'),sort:document.getElementById('sort'),grid:document.getElementById('grid'),count:document.getElementById('count')};
+const els={loc:document.getElementById('fLoc'),type:document.getElementById('fType'),status:document.getElementById('fStatus'),beds:document.getElementById('fBeds'),baths:document.getElementById('fBaths'),search:document.getElementById('fSearch'),price:document.getElementById('fPrice'),priceLabel:document.getElementById('priceLabel'),sort:document.getElementById('sort'),grid:document.getElementById('grid'),count:document.getElementById('count')};
+let currentPage=1; const perPage=9;
 function init(){
+  const params=new URLSearchParams(location.search);
+  if(params.get('type')) els.type.value=params.get('type');
+  if(params.get('city')) { /* will match loc after populate */ }
   const cities=[...new Set(getProperties().map(p=>p.city))];
   cities.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;els.loc.appendChild(o)});
-  ['input','change'].forEach(e=>{els.loc.addEventListener(e,render);els.type.addEventListener(e,render);els.status.addEventListener(e,render);els.beds.addEventListener(e,render);els.baths.addEventListener(e,render);els.search.addEventListener(e,render);els.price.addEventListener('input',()=>{els.priceLabel.textContent=els.price.value==1000000?'1M+':'$'+Number(els.price.value).toLocaleString();render()});els.sort.addEventListener(e,render)});
+  if(params.get('city')) els.loc.value=params.get('city');
+  if(params.get('type')) els.type.value=params.get('type');
+  ['input','change'].forEach(e=>{
+    els.loc.addEventListener(e,()=>{currentPage=1;render()});
+    els.type.addEventListener(e,()=>{currentPage=1;render()});
+    els.status.addEventListener(e,()=>{currentPage=1;render()});
+    els.beds.addEventListener(e,()=>{currentPage=1;render()});
+    els.baths.addEventListener(e,()=>{currentPage=1;render()});
+    els.search.addEventListener(e,()=>{currentPage=1;render()});
+    els.sort.addEventListener(e,()=>{currentPage=1;render()});
+  });
+  els.price.addEventListener('input',()=>{els.priceLabel.textContent=els.price.value==1000000?'$1M+':'$'+Number(els.price.value).toLocaleString();currentPage=1;render()});
   render();
 }
 function getFiltered(){
@@ -59,7 +92,7 @@ function getFiltered(){
     if(els.beds.value && String(p.beds)!==els.beds.value) return false;
     if(els.baths.value && String(p.baths)!==els.baths.value) return false;
     if(p.price>Number(els.price.value)) return false;
-    if(els.search.value && !(`${p.title} ${p.city}`.toLowerCase().includes(els.search.value.toLowerCase()))) return false;
+    if(els.search.value && !(`${p.title} ${p.city} ${p.location}`.toLowerCase().includes(els.search.value.toLowerCase()))) return false;
     return true;
   });
   if(els.sort.value==='low') list=[...list].sort((a,b)=>a.price-b.price);
@@ -68,10 +101,35 @@ function getFiltered(){
 }
 function render(){
   const list=getFiltered();
-  els.count.textContent=`Showing ${list.length} of ${getProperties().length} results`;
-  els.grid.innerHTML=list.length?list.map(p=>`<a href="property.html?id=${p.id}" class="group bg-white rounded-2xl overflow-hidden border border-zinc-100 hover:shadow-xl transition"><div class="relative h-52 overflow-hidden"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status}</span><span class="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full bg-white/90 backdrop-blur font-medium">${p.type}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1">${p.title}</h3><p class="text-xs text-zinc-500 mt-1 line-clamp-1">${p.location}</p><div class="flex items-center gap-2 mt-3 text-xs text-zinc-600"><span>${p.beds} beds</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.baths} baths</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.sqft} sqft</span></div><div class="mt-4 flex items-center justify-between"><span class="font-bold">${p.priceLabel}</span><span class="text-xs text-violet-600 font-medium">View →</span></div></div></a>`).join(''):`<div class="col-span-full text-center py-16 text-zinc-500">No properties found</div>`;
+  const totalPages=Math.ceil(list.length/perPage)||1;
+  if(currentPage>totalPages) currentPage=totalPages;
+  const paged=list.slice((currentPage-1)*perPage, currentPage*perPage);
+  els.count.textContent=`Showing ${paged.length} of ${list.length} results`;
+  els.grid.innerHTML=paged.length?paged.map(p=>{
+    const garage=p.garages||p.garage||'no garage';
+    const gLabel=typeof garage==='number'?garage+' garage':garage;
+    return `<a href="property.html?id=${p.id}" class="group bg-white rounded-[15px] overflow-hidden border border-zinc-100 hover:shadow-[0_12px_40px_rgba(21,32,70,.12)] transition flex flex-col">
+      <div class="relative h-52 overflow-hidden rounded-[15px] m-2 mb-0"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-accent text-white':'bg-amber-500 text-white'}">${p.status}</span><span class="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full bg-white/90 backdrop-blur font-medium text-heading">${p.type}</span></div>
+      <div class="p-5 flex-1 flex flex-col">
+        <h3 class="font-semibold text-heading line-clamp-1 group-hover:text-accent">${p.title}</h3><p class="text-xs text-body mt-1 flex items-center gap-1"><i class="fa-solid fa-location-dot text-accent"></i> ${p.location}</p>
+        <ul class="flex flex-wrap gap-x-3 gap-y-1 mt-3 text-xs border-y py-3">
+          <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-bed"></i></span> ${p.beds} beds</li>
+          <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-warehouse"></i></span> ${gLabel}</li>
+          <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-bath"></i></span> ${p.baths} baths</li>
+          <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-ruler-combined"></i></span> ${p.sqft} sqft</li>
+        </ul>
+        <div class="mt-4 flex items-center justify-between"><div><div class="text-xs">${p.status}</div><div class="font-bold text-heading">${p.priceLabel}</div></div><span class="h-9 w-9 rounded-[7px] bg-accent text-white grid place-items-center"><i class="fa-solid fa-arrow-right text-xs"></i></span></div>
+      </div>
+    </a>`;
+  }).join(''):`<div class="col-span-full text-center py-16 text-body">No properties found — try resetting filters</div>`;
+  // pagination
+  const pag=document.getElementById('pagination');
+  let html='';
+  for(let i=1;i<=totalPages;i++) html+=`<button onclick="goPage(${i})" class="h-9 w-9 rounded-xl grid place-items-center text-sm font-medium ${i===currentPage?'bg-accent text-white':'bg-white border hover:border-accent hover:text-accent'}">${i}</button>`;
+  pag.innerHTML=html;
 }
-function resetFilters(){els.loc.value='';els.type.value='';els.status.value='';els.beds.value='';els.baths.value='';els.search.value='';els.price.value=1000000;els.priceLabel.textContent='1M+';els.sort.value='default';render();}
+function goPage(n){currentPage=n;render();window.scrollTo({top:0,behavior:'smooth'})}
+function resetFilters(){els.loc.value='';els.type.value='';els.status.value='';els.beds.value='';els.baths.value='';els.search.value='';els.price.value=1000000;els.priceLabel.textContent='$1M+';els.sort.value='default';currentPage=1;render();}
 document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>

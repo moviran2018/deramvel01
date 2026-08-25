@@ -4,73 +4,124 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Property Details — Dreamwell</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-<style>body{font-family:Inter,sans-serif}</style>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{accent:'#19CF79',heading:'#152046',body:'#636363',muted:'#F5F7FA'},fontFamily:{heading:['Golos Text','sans-serif'],body:['Inter','sans-serif']}}}}</script>
+<style>body{font-family:'Inter',sans-serif;background:#F5F7FA;color:#636363}h1,h2,h3{font-family:'Golos Text',sans-serif;color:#152046}</style>
 </head>
-<body class="bg-zinc-50 text-zinc-900">
-<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-zinc-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-lg bg-zinc-900 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">Dreamwell</span></a>
-    <nav class="hidden md:flex gap-6 text-sm"><a href="index.html" class="text-zinc-600">Home</a><a href="properties.html" class="font-medium">Listing</a><a href="admin/index.html" class="text-violet-600 font-medium">Admin</a></nav>
+<body class="bg-[#F5F7FA]">
+<header class="sticky top-0 z-40 bg-white shadow-[0_4px_20px_rgba(21,32,70,.07)]">
+  <div class="max-w-[1620px] mx-auto px-4 lg:px-6 h-[86px] flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><span class="h-9 w-9 rounded-lg bg-accent grid place-items-center text-white"><i class="fa-solid fa-house"></i></span><span class="font-bold text-[22px] text-heading" style="font-family:'Golos Text'">Dreamwell</span></a>
+    <nav class="hidden xl:flex items-center gap-6 text-sm font-medium text-heading"><a href="index.html">Home</a><a href="properties.html" class="text-accent">Listing</a><a href="admin/index.html" class="text-accent">Admin</a></nav>
+    <a href="properties.html" class="text-sm hover:text-accent">← Back to listings</a>
   </div>
 </header>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <a href="properties.html" class="text-sm text-zinc-500">← Back to listings</a>
-  <div id="content" class="mt-6"></div>
+
+<div class="max-w-[1620px] mx-auto px-4 lg:px-6 py-8">
+  <div id="breadcrumb" class="flex items-center gap-2 text-sm mb-6"><a href="index.html" class="hover:text-accent">Home</a><span>/</span><a href="properties.html" class="hover:text-accent">Listing</a><span>/</span><span class="text-heading font-medium">Property Details</span></div>
+  <div id="content"></div>
+  <div id="related" class="mt-16"></div>
 </div>
+
+<footer class="mt-16 bg-[#0D0D0D] text-zinc-400">
+  <div class="max-w-[1620px] mx-auto px-4 lg:px-6 py-10 text-center text-xs border-t border-white/10">© 2024 Dreamwell. All rights reserved.</div>
+</footer>
+
 <script src="assets/app.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
   const id=new URLSearchParams(location.search).get('id');
   const p=getProperties().find(x=>x.id===id);
   const el=document.getElementById('content');
-  if(!p){ el.innerHTML=`<div class="text-center py-16">Not found — <a href="properties.html" class="text-violet-600">Back</a></div>`; return; }
-  const gallery = p.gallery || [p.image];
+  if(!p){ el.innerHTML=`<div class="text-center py-16 bg-white rounded-2xl">Not found — <a href="properties.html" class="text-accent">Back</a></div>`; return; }
+  const gallery = p.gallery || [p.image, "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600"];
+  const garage = p.garages || p.garage || 'no garage';
+  const gLabel = typeof garage==='number'? garage+' garage' : garage;
+
   el.innerHTML=`
     <div class="grid lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
-        <div class="h-[420px] rounded-3xl overflow-hidden bg-zinc-100"><img src="${p.image}" class="h-full w-full object-cover"></div>
-        <div class="grid grid-cols-3 gap-3 mt-3">${gallery.slice(0,3).map((g,i)=>`<img src="${g}" class="h-24 rounded-xl object-cover cursor-pointer hover:opacity-80" onclick="document.querySelector('#mainImg').src='${g}'" id="${i===0?'mainImg':''}">`).join('')}</div>
-        <h1 class="text-2xl font-bold mt-6">${p.title}</h1>
-        <p class="text-zinc-500 text-sm mt-1">${p.location} • ${p.type} • ${p.status}</p>
-        <p class="mt-4 text-zinc-700 leading-7">${p.description}</p>
-        <div class="flex flex-wrap gap-3 mt-6 text-sm">
-          <span class="px-4 py-2 rounded-full bg-zinc-900 text-white">${p.beds} Beds</span>
-          <span class="px-4 py-2 rounded-full bg-white border">${p.baths} Baths</span>
-          <span class="px-4 py-2 rounded-full bg-white border">${p.sqft} sqft</span>
-          <span class="px-4 py-2 rounded-full bg-white border">${p.garages} garage</span>
+        <div class="bg-white rounded-[20px] p-3 shadow-[0_4px_20px_rgba(21,32,70,.06)]">
+          <div class="h-[420px] rounded-[15px] overflow-hidden bg-zinc-100"><img id="mainImg" src="${p.image}" class="h-full w-full object-cover"></div>
+          <div class="grid grid-cols-4 gap-3 mt-3">${gallery.slice(0,4).map((g,i)=>`<img src="${g}" class="h-24 rounded-xl object-cover cursor-pointer hover:opacity-80 border ${i===0?'border-accent':''}" onclick="document.getElementById('mainImg').src='${g}'">`).join('')}</div>
         </div>
-        ${p.panorama ? `
-        <div class="mt-8 bg-white rounded-2xl border p-6">
-          <h3 class="font-semibold flex items-center gap-2">🏠 تور مجازی ۳۶۰ درجه <span class="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-700">سبک</span></h3>
-          <p class="text-xs text-zinc-500 mt-1">با موس بچرخ، زوم کن — انگار داخل ویلایی (فقط با کلیک لود می‌شود)</p>
-          <button id="tourBtn" class="mt-4 px-5 py-2.5 rounded-xl bg-zinc-900 text-white text-sm">شروع تور مجازی</button>
-          <div id="panorama" class="hidden mt-4 h-[380px] rounded-2xl overflow-hidden border"></div>
-        </div>`:''}
-        ${p.video ? `
-        <div class="mt-6 bg-white rounded-2xl border p-6">
-          <h3 class="font-semibold">ویدئو معرفی</h3>
-          <video controls preload="none" poster="${p.image}" class="mt-3 w-full rounded-xl"><source src="${p.video}" type="video/mp4"></video>
-        </div>`:''}
-        ${p.podcast ? `
-        <div class="mt-6 bg-white rounded-2xl border p-6">
-          <h3 class="font-semibold">پادکست توضیحات</h3>
-          <audio controls preload="none" class="mt-3 w-full"><source src="${p.podcast}" type="audio/mpeg"></audio>
-        </div>`:''}
+
+        <div class="bg-white rounded-[20px] p-6 lg:p-8 mt-6 shadow-[0_4px_20px_rgba(21,32,70,.06)]">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div><h1 class="text-[26px] font-bold leading-tight">${p.title}</h1><p class="text-sm mt-2 flex items-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> ${p.location} • <span class="px-2 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold">${p.type}</span> <span class="px-2 py-1 rounded-full ${p.status==='For Rent'?'bg-emerald-100 text-emerald-700':'bg-amber-100 text-amber-700'} text-xs font-semibold">${p.status}</span></p></div>
+            <div class="text-right"><div class="text-2xl font-bold text-heading">${p.priceLabel}</div><div class="text-xs">${p.sqft} sqft • ${p.beds} beds • ${p.baths} baths</div></div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+            <div class="rounded-xl bg-[#F5F7FA] p-4 text-center"><div class="text-accent"><i class="fa-solid fa-bed"></i></div><div class="text-sm font-semibold text-heading mt-1">${p.beds} Beds</div></div>
+            <div class="rounded-xl bg-[#F5F7FA] p-4 text-center"><div class="text-accent"><i class="fa-solid fa-bath"></i></div><div class="text-sm font-semibold text-heading mt-1">${p.baths} Baths</div></div>
+            <div class="rounded-xl bg-[#F5F7FA] p-4 text-center"><div class="text-accent"><i class="fa-solid fa-ruler-combined"></i></div><div class="text-sm font-semibold text-heading mt-1">${p.sqft} sqft</div></div>
+            <div class="rounded-xl bg-[#F5F7FA] p-4 text-center"><div class="text-accent"><i class="fa-solid fa-warehouse"></i></div><div class="text-sm font-semibold text-heading mt-1">${gLabel}</div></div>
+          </div>
+
+          <h3 class="mt-8 font-semibold text-heading text-lg">About this property</h3>
+          <p class="mt-3 text-sm leading-7">${p.description} Beautifully maintained, with natural light, modern finishes and a prime location close to transport, schools and shopping.</p>
+
+          <h3 class="mt-8 font-semibold text-heading">Features</h3>
+          <ul class="grid grid-cols-2 gap-2 mt-3 text-sm">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent"></i> Air Conditioning</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent"></i> Swimming Pool</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent"></i> Gym Access</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent"></i> 24/7 Security</li>
+          </ul>
+
+          ${p.panorama ? `
+          <div class="mt-8 bg-[#F5F7FA] rounded-2xl p-6 border">
+            <h3 class="font-semibold flex items-center gap-2 text-heading">🏠 تور مجازی ۳۶۰ درجه <span class="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-700">سبک - کلیک برای لود</span></h3>
+            <p class="text-xs mt-1">با موس بچرخ، زوم کن — انگار داخل خانه‌ای (lazy load)</p>
+            <button id="tourBtn" class="mt-4 px-6 py-2.5 rounded-[7px] bg-accent text-white text-sm font-medium hover:bg-heading transition">شروع تور مجازی</button>
+            <div id="panorama" class="hidden mt-4 h-[380px] rounded-2xl overflow-hidden border bg-black"></div>
+          </div>`:''}
+
+          ${p.video ? `
+          <div class="mt-6 bg-white rounded-2xl border p-6">
+            <h3 class="font-semibold text-heading">ویدئو معرفی</h3>
+            <video controls preload="none" poster="${p.image}" class="mt-3 w-full rounded-xl"><source src="${p.video}" type="video/mp4"></video>
+          </div>`:''}
+
+          ${p.podcast ? `
+          <div class="mt-6 bg-white rounded-2xl border p-6">
+            <h3 class="font-semibold text-heading">پادکست توضیحات</h3>
+            <audio controls preload="none" class="mt-3 w-full"><source src="${p.podcast}" type="audio/mpeg"></audio>
+          </div>`:''}
+        </div>
       </div>
-      <div class="bg-white rounded-2xl border p-6 h-fit sticky top-20">
-        <div class="text-2xl font-bold">${p.priceLabel}</div>
-        <div class="mt-4 space-y-3 text-sm">
-          <div class="flex justify-between"><span class="text-zinc-500">Type</span><span class="font-medium">${p.type}</span></div>
-          <div class="flex justify-between"><span class="text-zinc-500">Status</span><span class="font-medium">${p.status}</span></div>
-          <div class="flex justify-between"><span class="text-zinc-500">City</span><span class="font-medium">${p.city}</span></div>
+
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <div class="bg-white rounded-[20px] p-6 shadow-[0_4px_20px_rgba(21,32,70,.06)] sticky top-[100px]">
+          <div class="text-2xl font-bold text-heading">${p.priceLabel}</div>
+          <div class="mt-1 text-xs ${p.status==='For Rent'?'text-emerald-600':'text-amber-600'} font-medium">${p.status} • ${p.type}</div>
+          <div class="mt-6 space-y-3 text-sm">
+            <div class="flex justify-between py-2 border-b"><span class="text-body">Type</span><span class="font-medium text-heading">${p.type}</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-body">Status</span><span class="font-medium text-heading">${p.status}</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-body">City</span><span class="font-medium text-heading">${p.city}</span></div>
+            <div class="flex justify-between py-2 border-b"><span class="text-body">Sqft</span><span class="font-medium text-heading">${p.sqft}</span></div>
+            <div class="flex justify-between py-2"><span class="text-body">Garage</span><span class="font-medium text-heading">${gLabel}</span></div>
+          </div>
+          <button onclick="alert('Agent contacted! We will call you shortly.')" class="w-full mt-6 py-3 rounded-[7px] bg-accent text-white font-semibold hover:bg-heading transition">Contact Agent</button>
+          <button onclick="toggleWishlistDetail('${p.id}')" id="wishBtn" class="w-full mt-3 py-3 rounded-[7px] border border-accent text-accent font-medium hover:bg-accent hover:text-white transition"><i class="fa-regular fa-heart"></i> Save Property</button>
+          <a href="admin/index.html" class="block text-center mt-3 text-xs text-accent hover:underline">Edit in Admin →</a>
+          <div class="mt-6 flex items-center gap-3 bg-[#F5F7FA] rounded-xl p-4">
+            <img src="https://i.pravatar.cc/100?img=12" class="h-12 w-12 rounded-full"><div><div class="text-sm font-semibold text-heading">Alex Morgan</div><div class="text-xs">Certified Agent • 4.9 ★</div></div>
+          </div>
         </div>
-        <button class="w-full mt-6 py-3 rounded-xl bg-zinc-900 text-white font-medium">Contact Agent</button>
-        <a href="admin/index.html" class="block text-center mt-3 text-xs text-violet-600">Edit in Admin →</a>
+
+        <div class="bg-heading rounded-[20px] p-6 text-white">
+          <h3 class="text-white font-semibold">Need more info?</h3><p class="text-sm text-white/70 mt-2 leading-6">Our agents are available 9am—8pm daily for tours and financing advice.</p><a href="tel:+444547800112" class="inline-flex mt-4 px-6 py-2.5 rounded-full bg-accent text-white text-sm font-medium">Call +44 454 7800 112</a>
+        </div>
       </div>
     </div>`;
+
+  // panorama lazy
   if(p.panorama){
     const btn=document.getElementById('tourBtn');
     const pano=document.getElementById('panorama');
@@ -81,7 +132,29 @@ document.addEventListener('DOMContentLoaded',()=>{
       btn.style.display='none';
     });
   }
+  // related
+  const related=getProperties().filter(x=>x.id!==p.id && x.city===p.city).slice(0,3);
+  if(related.length){
+    document.getElementById('related').innerHTML=`<h2 class="text-[24px] font-semibold mb-6">Similar Properties</h2><div class="grid md:grid-cols-3 gap-6">${related.map(r=>{
+      const rg=r.garages||r.garage||'no garage'; return `<a href="property.html?id=${r.id}" class="group bg-white rounded-[15px] overflow-hidden border hover:shadow-lg transition"><div class="h-48 overflow-hidden"><img src="${r.image}" class="h-full w-full object-cover group-hover:scale-105 transition"></div><div class="p-5"><h3 class="font-semibold text-heading line-clamp-1">${r.title}</h3><p class="text-xs mt-1">${r.location}</p><div class="mt-3 font-bold text-heading">${r.priceLabel}</div></div></a>`;
+    }).join('')}</div>`;
+  }
+  updateWishBtn(p.id);
 });
+
+function toggleWishlistDetail(id){
+  let w=JSON.parse(localStorage.getItem('dw_wish')||'[]');
+  w=w.includes(id)?w.filter(x=>x!==id):[...w,id];
+  localStorage.setItem('dw_wish',JSON.stringify(w));
+  updateWishBtn(id);
+}
+function updateWishBtn(id){
+  const btn=document.getElementById('wishBtn');
+  if(!btn) return;
+  const w=JSON.parse(localStorage.getItem('dw_wish')||'[]');
+  btn.innerHTML=w.includes(id)?'<i class="fa-solid fa-heart"></i> Saved':'<i class="fa-regular fa-heart"></i> Save Property';
+  btn.className=w.includes(id)?'w-full mt-3 py-3 rounded-[7px] bg-accent text-white font-medium':'w-full mt-3 py-3 rounded-[7px] border border-accent text-accent font-medium hover:bg-accent hover:text-white transition';
+}
 </script>
 </body>
 </html>

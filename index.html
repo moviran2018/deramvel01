@@ -2,114 +2,387 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dreamwell — Real Estate</title>
+<title>Dreamwell — Real Estate HTML Template</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2319CF79'><path d='M12 2L2 8v12h7v-6h6v6h7V8z'/></svg>">
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{accent:'#19CF79',heading:'#152046',body:'#636363',muted:'#F5F7FA',dark:'#0D0D0D'},fontFamily:{heading:['Golos Text','sans-serif'],body:['Inter','sans-serif']}}}}</script>
 <style>
-body{font-family:Inter,sans-serif}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes floatSlow{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-14px) rotate(1deg)}}
-.float{animation:float 5s ease-in-out infinite}
-.floatSlow{animation:floatSlow 6s ease-in-out infinite}
-.swiper-pagination-bullet-active{background:#18181b !important}
+body{font-family:'Inter',sans-serif;background:#F5F7FA;color:#636363}
+h1,h2,h3,h4{font-family:'Golos Text',sans-serif;color:#152046}
+.hero-bg{background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat}
+.swiper-pagination-bullet-active{background:#19CF79!important}
+.adv-wrap{max-height:0;opacity:0;overflow:hidden;transition:all .35s ease}
+.adv-wrap.open{max-height:600px;opacity:1;margin-top:16px;padding-top:16px;border-top:1px solid #F0F0F0}
 </style>
 </head>
-<body class="bg-zinc-50 text-zinc-900">
-<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-zinc-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-lg bg-zinc-900 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">Dreamwell</span></a>
-    <nav class="hidden md:flex gap-6 text-sm"><a href="index.html" class="font-medium">Home</a><a href="properties.html" class="text-zinc-600 hover:text-zinc-900">Listing</a><a href="fa/index.html" class="text-zinc-600">فارسی</a><a href="admin/index.html" class="text-violet-600 font-medium">Admin</a></nav>
-    <a href="admin/index.html" class="hidden md:inline-flex px-4 py-2 rounded-full bg-zinc-900 text-white text-sm">Add Property</a>
+<body class="bg-[#F5F7FA] text-body antialiased">
+<!-- Preloader simple -->
+<div id="preloader" class="fixed inset-0 bg-white z-[999] grid place-items-center"><div class="h-14 w-14 rounded-full bg-accent grid place-items-center text-white animate-pulse"><i class="fa-solid fa-house"></i></div></div>
+
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-white shadow-[0_4px_20px_rgba(21,32,70,.07)]">
+  <div class="max-w-[1620px] mx-auto px-4 lg:px-6 h-[86px] flex items-center justify-between gap-4">
+    <div class="flex items-center gap-8">
+      <a href="index.html" class="flex items-center gap-2 shrink-0"><span class="h-9 w-9 rounded-lg bg-accent grid place-items-center text-white"><i class="fa-solid fa-house"></i></span><span class="font-heading font-bold text-[22px] text-heading tracking-tight">Dreamwell</span></a>
+      <nav class="hidden xl:flex items-center gap-7 text-[15px] font-medium text-heading">
+        <div class="relative group"><a href="index.html" class="flex items-center gap-1 py-2">Home <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i></a><div class="absolute left-0 top-full hidden group-hover:block bg-white shadow-xl rounded-xl py-3 min-w-[180px] border"><a href="index.html" class="block px-5 py-2 text-sm hover:text-accent">Home Default</a><a href="index.html" class="block px-5 py-2 text-sm hover:text-accent">Home V2</a><a href="index.html" class="block px-5 py-2 text-sm hover:text-accent">Home V3</a></div></div>
+        <div class="relative group"><a href="properties.html" class="flex items-center gap-1 py-2">Listing <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i></a><div class="absolute left-0 top-full hidden group-hover:block bg-white shadow-xl rounded-xl py-3 min-w-[220px] border"><a href="properties.html" class="block px-5 py-2 text-sm hover:text-accent">Property Grid View</a><a href="properties.html" class="block px-5 py-2 text-sm hover:text-accent">Property Map View</a><a href="property.html?id=1" class="block px-5 py-2 text-sm hover:text-accent">Property Details</a></div></div>
+        <a href="#about" class="py-2 hover:text-accent">About</a>
+        <a href="#contact" class="py-2 hover:text-accent">Contact</a>
+        <div class="relative group"><a href="#" class="flex items-center gap-1 py-2">Blog <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i></a><div class="absolute left-0 top-full hidden group-hover:block bg-white shadow-xl rounded-xl py-3 min-w-[180px] border"><a href="#blog" class="block px-5 py-2 text-sm hover:text-accent">Blog</a><a href="#blog" class="block px-5 py-2 text-sm hover:text-accent">Blog Details</a></div></div>
+        <a href="fa/index.html" class="py-2 hover:text-accent">فارسی</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="admin/index.html" class="hidden md:inline-flex items-center gap-2 px-6 py-[11px] rounded-[7px] bg-accent text-white text-[15px] font-medium hover:bg-white hover:text-accent border border-accent transition"><i class="fa-solid fa-circle-user"></i> Sign In</a>
+      <a href="admin/index.html" class="inline-flex items-center gap-2 px-6 py-[11px] rounded-[7px] bg-white text-accent border border-accent text-[15px] font-medium hover:bg-accent hover:text-white transition"><i class="fa-solid fa-circle-plus"></i> Add Property</a>
+      <button id="mMenuBtn" class="xl:hidden h-10 w-10 grid place-items-center rounded-lg border"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <!-- mobile -->
+  <div id="mMenu" class="hidden xl:hidden border-t bg-white px-4 py-4 space-y-3">
+    <a href="index.html" class="block py-2 font-medium text-heading">Home</a><a href="properties.html" class="block py-2">Listing</a><a href="fa/index.html" class="block py-2">فارسی</a><a href="admin/index.html" class="block py-2 text-accent font-medium">Admin →</a>
   </div>
 </header>
 
-<section class="bg-white border-b">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid lg:grid-cols-2 gap-10 items-center">
+<!-- Hero -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-6">
+  <div class="hero-bg rounded-[25px] min-h-[520px] lg:min-h-[640px] flex flex-col items-center justify-center text-center px-6 py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/10 rounded-[25px]"></div>
+    <div class="relative z-10 max-w-3xl">
+      <h1 class="text-[42px] lg:text-[64px] font-bold leading-[1.1] text-white drop-shadow">We provide <span class="text-accent">the best house</span> to be your home</h1>
+      <p class="mt-6 text-white/90 text-[18px] lg:text-[24px]">We provide the best house to be your home</p>
+    </div>
+  </div>
+  <!-- Filter Tabs -->
+  <div class="max-w-5xl mx-auto -mt-14 relative z-20 px-2">
+    <ul id="heroTabs" class="flex items-center justify-center gap-2 mb-3">
+      <li data-tab="buy" class="active px-6 py-2.5 rounded-full bg-accent text-white text-sm font-semibold cursor-pointer shadow">Buy</li>
+      <li data-tab="rent" class="px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border hover:bg-accent hover:text-white transition">Rent</li>
+      <li data-tab="coliving" class="px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border hover:bg-accent hover:text-white transition">Co-Living</li>
+    </ul>
+    <div class="bg-white rounded-[20px] shadow-[0_20px_60px_rgba(21,32,70,.12)] p-4 lg:p-6">
+      <form id="heroForm" class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end">
+        <div class="flex-1">
+          <label class="text-xs font-medium text-heading">Type</label>
+          <select id="heroType" class="mt-1 w-full rounded-xl border border-zinc-200 px-4 py-3 text-[16px] font-semibold text-heading bg-white">
+            <option>Houses</option><option>Open House</option><option>Rent House</option><option>Sale House</option><option>Buy House</option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <label class="text-xs font-medium text-heading">Location</label>
+          <select id="heroLoc" class="mt-1 w-full rounded-xl border border-zinc-200 px-4 py-3 text-[16px] font-semibold text-heading bg-white">
+            <option value="">California</option><option value="Bali">Bali</option><option value="Singapore">Singapore</option><option value="New York">New York</option><option value="London">London</option><option value="Los Angeles">Los Angeles</option>
+          </select>
+        </div>
+        <div class="flex gap-3 lg:ml-2">
+          <button type="button" id="advBtn" class="inline-flex items-center gap-2 px-5 py-3 rounded-[7px] bg-white border border-[#E5E7EB] text-heading text-[15px] font-medium hover:border-accent hover:text-accent transition"><i class="fa-solid fa-sliders"></i> Advanced Search</button>
+          <button type="submit" class="inline-flex items-center gap-2 px-7 py-3 rounded-[7px] bg-accent text-white text-[15px] font-medium hover:bg-heading transition"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
+      </form>
+      <div id="advWrap" class="adv-wrap">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <select class="rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option>Any Location</option><option>Bali</option><option>Singapore</option><option>New York</option></select>
+          <select class="rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option>Any Property</option><option>House</option><option>Apartment</option><option>Villa</option></select>
+          <select class="rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option>Bedrooms</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          <select class="rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option>Bathrooms</option><option>1</option><option>2</option><option>3</option></select>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
+          <div class="flex items-center gap-3"><span class="text-sm font-medium text-heading whitespace-nowrap">Price:</span><input id="priceRange" type="range" min="0" max="1000000" value="1000000" class="flex-1 accent-accent"><span id="priceVal" class="text-sm font-semibold text-accent">$1M+</span></div>
+          <div class="flex gap-3"><input placeholder="Min Area (sqft)" class="flex-1 rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><input placeholder="Max Area (sqft)" class="flex-1 rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Property Types -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <h2 class="text-center text-[36px] lg:text-[48px] font-semibold leading-tight">Discover the Property Types</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-10">
+    <a href="properties.html?type=House" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent group-hover:bg-accent group-hover:text-white transition"><i class="fa-solid fa-house text-lg"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">HOUSE</div>
+    </a>
+    <a href="properties.html?type=Apartment" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent group-hover:bg-accent group-hover:text-white transition"><i class="fa-solid fa-building text-lg"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">APARTMENT</div>
+    </a>
+    <a href="properties.html?type=Villa" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent group-hover:bg-accent group-hover:text-white transition"><i class="fa-solid fa-warehouse text-lg"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">VILLA</div>
+    </a>
+    <a href="properties.html?type=Bungalow" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent group-hover:bg-accent group-hover:text-white transition"><i class="fa-solid fa-house-chimney text-lg"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">BUNGALOW</div>
+    </a>
+    <a href="properties.html?type=Townhouse" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent group-hover:bg-accent group-hover:text-white transition"><i class="fa-solid fa-city text-lg"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">TOWNHOUSE</div>
+    </a>
+    <a href="properties.html?type=Loft" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent group-hover:bg-accent group-hover:text-white transition"><i class="fa-solid fa-door-open text-lg"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">LOFT</div>
+    </a>
+    <a href="properties.html?type=Office" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent group-hover:bg-accent group-hover:text-white transition"><i class="fa-solid fa-briefcase text-lg"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">OFFICE</div>
+    </a>
+    <a href="properties.html" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] hover:-translate-y-1 transition">
+      <span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-heading text-white"><i class="fa-solid fa-plus"></i></span><div class="mt-4 text-[14px] font-medium tracking-widest text-heading">MORE</div>
+    </a>
+  </div>
+</section>
+
+<!-- Featured Properties Slider -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+    <h2 class="text-[36px] lg:text-[48px] font-semibold leading-tight max-w-xl">Explore the Featured Properties</h2>
+    <div class="flex items-center gap-3 shrink-0">
+      <button id="featPrev" class="h-11 w-11 rounded-full bg-white border shadow grid place-items-center text-heading hover:bg-accent hover:text-white hover:border-accent transition"><i class="fa-solid fa-arrow-left"></i></button>
+      <button id="featNext" class="h-11 w-11 rounded-full bg-white border shadow grid place-items-center text-heading hover:bg-accent hover:text-white hover:border-accent transition"><i class="fa-solid fa-arrow-right"></i></button>
+      <a href="properties.html" class="ml-2 hidden lg:inline-flex text-sm font-medium text-accent hover:text-heading">View More →</a>
+    </div>
+  </div>
+  <div class="swiper mt-8 !pb-10" id="featSwiper">
+    <div class="swiper-wrapper" id="featuredGrid"></div>
+    <div class="swiper-pagination !bottom-0"></div>
+  </div>
+</section>
+
+<!-- Popular Listing Tabs -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-8">
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+    <h2 class="text-[30px] lg:text-[42px] font-semibold">Popular Listing</h2>
+    <div class="flex gap-2 p-1 bg-white rounded-full border w-fit">
+      <button data-plist="all" class="plistTab px-6 py-2 rounded-full bg-accent text-white text-sm font-medium">All</button>
+      <button data-plist="For Rent" class="plistTab px-6 py-2 rounded-full text-sm font-medium text-heading hover:bg-accent hover:text-white transition">For Rent</button>
+      <button data-plist="For Sale" class="plistTab px-6 py-2 rounded-full text-sm font-medium text-heading hover:bg-accent hover:text-white transition">For Sale</button>
+    </div>
+  </div>
+  <div id="plistGrid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8"></div>
+  <div class="text-center mt-8"><a href="properties.html" class="inline-flex px-8 py-3 rounded-[7px] bg-white border text-heading font-medium hover:bg-accent hover:text-white hover:border-accent transition">View All Properties</a></div>
+</section>
+
+<!-- Cities -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <h2 class="text-center text-[36px] lg:text-[48px] font-semibold">We Are Available in Many Cities</h2>
+  <p class="text-center mt-3 text-sm">Discover your ideal home where you want to be</p>
+  <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mt-10" id="citiesGrid"></div>
+</section>
+
+<!-- About / Customer Service -->
+<section id="about" class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <div class="bg-white rounded-[25px] p-6 lg:p-10 grid lg:grid-cols-2 gap-10 items-center shadow-[0_4px_20px_rgba(21,32,70,.06)]">
+    <div class="relative rounded-[20px] overflow-hidden h-[420px]">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" class="h-full w-full object-cover">
+      <div class="absolute bottom-4 left-4 bg-white rounded-2xl p-4 shadow-xl flex items-center gap-3">
+        <img src="https://i.pravatar.cc/100?img=12" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold text-heading">Jay H. Sheffield</div><div class="text-xs text-body">Customer</div></div><span class="ml-4 text-accent"><i class="fa-solid fa-star"></i> 4.9</span>
+      </div>
+    </div>
     <div>
-      <h1 id="heroTitle" class="text-4xl lg:text-5xl font-bold leading-tight">We provide the best house to be your home</h1>
-      <p class="mt-4 text-zinc-600">Together with professional agents, there is no house that you can't get.</p>
-      <div class="mt-6 bg-white border border-zinc-200 rounded-2xl p-4 shadow-sm flex flex-wrap gap-3">
-        <select id="heroLoc" class="flex-1 min-w-[140px] rounded-xl border border-zinc-200 px-3 py-3 text-sm"><option value="">Any Location</option><option>New York</option><option>London</option><option>Bali</option><option>Singapore</option></select>
-        <select class="flex-1 min-w-[140px] rounded-xl border border-zinc-200 px-3 py-3 text-sm"><option>Any Property</option><option>House</option><option>Apartment</option><option>Villa</option></select>
-        <a href="properties.html" class="px-6 py-3 rounded-xl bg-zinc-900 text-white text-sm font-medium">Search</a>
+      <span class="inline-flex px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold">ABOUT US</span>
+      <h2 class="mt-4 text-[32px] lg:text-[42px] font-bold leading-tight">Providing friendly and customer-focused service</h2>
+      <p class="mt-4 text-sm leading-7">Our focus is on building long-term relationships and ensuring your real estate journey is smooth, transparent and rewarding.</p>
+      <ul class="mt-6 space-y-3 text-sm">
+        <li class="flex gap-3"><span class="h-6 w-6 rounded-full bg-accent text-white grid place-items-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span> Expert guidance from local property specialists</li>
+        <li class="flex gap-3"><span class="h-6 w-6 rounded-full bg-accent text-white grid place-items-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span> Verified listings with virtual tours and detailed insights</li>
+        <li class="flex gap-3"><span class="h-6 w-6 rounded-full bg-accent text-white grid place-items-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span> End-to-end support from search to closing</li>
+      </ul>
+      <a href="properties.html" class="inline-flex mt-8 px-7 py-3 rounded-[7px] bg-accent text-white font-medium hover:bg-heading transition">Explore More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+      <div class="grid grid-cols-3 gap-6 mt-10 border-t pt-6">
+        <div><div class="text-[28px] font-bold text-heading">1200+</div><div class="text-xs">Properties Listed</div></div>
+        <div><div class="text-[28px] font-bold text-heading">850+</div><div class="text-xs">Happy Clients</div></div>
+        <div><div class="text-[28px] font-bold text-heading">15+</div><div class="text-xs">Years Experience</div></div>
       </div>
     </div>
-    <div class="relative h-[380px] rounded-3xl overflow-hidden bg-zinc-100">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900" class="h-full w-full object-cover" alt="hero">
-      <!-- Real estate floating elements -->
-      <div class="absolute top-6 left-6 bg-white rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3 float">
-        <div class="h-8 w-8 rounded-full bg-emerald-500 grid place-items-center text-white text-xs">⌂</div>
-        <div><div class="text-xs text-zinc-500">New Listing</div><div class="text-sm font-semibold">Villa in Bali</div></div>
-      </div>
-      <div class="absolute bottom-6 right-6 bg-zinc-900 text-white rounded-2xl shadow-xl px-4 py-3 floatSlow">
-        <div class="text-xs opacity-70">Starting from</div><div class="font-bold">$1,900 /month</div>
-      </div>
-      <div class="absolute top-1/2 -right-2 -translate-y-1/2 bg-white rounded-full h-12 w-12 grid place-items-center shadow-lg float hidden lg:grid">📍</div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <h2 class="text-center text-[36px] lg:text-[48px] font-semibold">How It Works</h2>
+  <p class="text-center mt-3 text-sm">Simple 3 steps to your dream home</p>
+  <div class="grid md:grid-cols-3 gap-6 mt-10">
+    <div class="bg-white rounded-[20px] p-8 text-center relative overflow-hidden hover:-translate-y-1 transition shadow-[0_4px_20px_rgba(21,32,70,.05)]">
+      <div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
+      <div class="absolute top-4 right-6 text-[48px] font-bold text-heading/5">01</div>
+      <h3 class="mt-6 text-[20px] font-semibold">Search Property</h3><p class="mt-3 text-sm leading-6">Browse thousands of verified listings with advanced filters for location, price and amenities.</p>
+    </div>
+    <div class="bg-white rounded-[20px] p-8 text-center relative overflow-hidden hover:-translate-y-1 transition shadow-[0_4px_20px_rgba(21,32,70,.05)]">
+      <div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-2xl"><i class="fa-solid fa-handshake"></i></div>
+      <div class="absolute top-4 right-6 text-[48px] font-bold text-heading/5">02</div>
+      <h3 class="mt-6 text-[20px] font-semibold">Meet the Agent</h3><p class="mt-3 text-sm leading-6">Connect with our expert agents for personalized tours, virtual viewings and negotiations.</p>
+    </div>
+    <div class="bg-white rounded-[20px] p-8 text-center relative overflow-hidden hover:-translate-y-1 transition shadow-[0_4px_20px_rgba(21,32,70,.05)]">
+      <div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-2xl"><i class="fa-solid fa-key"></i></div>
+      <div class="absolute top-4 right-6 text-[48px] font-bold text-heading/5">03</div>
+      <h3 class="mt-6 text-[20px] font-semibold">Get Your House</h3><p class="mt-3 text-sm leading-6">Close the deal with our support — paperwork, financing and moving assistance included.</p>
     </div>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <h2 class="text-2xl font-bold">Discover the Property Types</h2>
-  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mt-6">
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">H</div><div class="mt-2 text-xs font-medium">HOUSE</div></a>
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">A</div><div class="mt-2 text-xs font-medium">APARTMENT</div></a>
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">V</div><div class="mt-2 text-xs font-medium">VILLA</div></a>
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">B</div><div class="mt-2 text-xs font-medium">BUNGALOW</div></a>
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">T</div><div class="mt-2 text-xs font-medium">TOWNHOUSE</div></a>
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">L</div><div class="mt-2 text-xs font-medium">LOFT</div></a>
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">O</div><div class="mt-2 text-xs font-medium">OFFICE</div></a>
-    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-200 grid place-items-center text-xs">+</div><div class="mt-2 text-xs font-medium">MORE</div></a>
+<!-- Testimonials -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <h2 class="text-center text-[36px] lg:text-[48px] font-semibold">What Our Clients Say</h2>
+  <div class="swiper mt-8 !pb-10" id="testiSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow-[0_8px_30px_rgba(21,32,70,.06)]"><div class="flex gap-1 text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="mt-4 text-sm leading-7">"Dreamwell made finding my apartment effortless. The virtual tour was incredibly realistic and the agent was super responsive!"</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=32" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold text-heading">Sarah Jenkins</div><div class="text-xs">Singapore</div></div></div></div></div>
+      <div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow-[0_8px_30px_rgba(21,32,70,.06)]"><div class="flex gap-1 text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="mt-4 text-sm leading-7">"Professional, fast, and transparent. I sold my house in two weeks above asking price thanks to their marketing."</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=15" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold text-heading">Michael Chen</div><div class="text-xs">New York</div></div></div></div></div>
+      <div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow-[0_8px_30px_rgba(21,32,70,.06)]"><div class="flex gap-1 text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="mt-4 text-sm leading-7">"The best real estate experience I've had. The advanced search saved me hours and the support was outstanding."</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=26" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold text-heading">Aisha Khan</div><div class="text-xs">London</div></div></div></div></div>
+    </div>
+    <div class="swiper-pagination !bottom-0"></div>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between"><h2 class="text-2xl font-bold">Featured Properties</h2><a href="properties.html" class="text-sm text-violet-600">View More →</a></div>
-  <div class="swiper mt-6 !pb-10">
-    <div id="featuredGrid" class="swiper-wrapper"></div>
-    <div class="swiper-pagination"></div>
+<!-- Blog -->
+<section id="blog" class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-8">
+  <div class="flex items-end justify-between gap-4">
+    <h2 class="text-[32px] lg:text-[42px] font-semibold">Latest Blog & News</h2>
+    <a href="#" class="hidden lg:inline-flex text-sm font-medium text-accent">View All →</a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-6 mt-8">
+    <a href="#" class="group bg-white rounded-[20px] overflow-hidden shadow-[0_4px_20px_rgba(21,32,70,.06)] hover:-translate-y-1 transition"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600" class="h-56 w-full object-cover group-hover:scale-105 transition duration-500"><div class="p-6"><div class="text-xs text-accent font-semibold">12 Jan 2024 • Real Estate</div><h3 class="mt-2 text-[18px] font-semibold leading-tight group-hover:text-accent">How to choose the perfect family home in a competitive market</h3><span class="inline-flex mt-4 text-sm font-medium text-heading">Read More →</span></div></a>
+    <a href="#" class="group bg-white rounded-[20px] overflow-hidden shadow-[0_4px_20px_rgba(21,32,70,.06)] hover:-translate-y-1 transition"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" class="h-56 w-full object-cover group-hover:scale-105 transition duration-500"><div class="p-6"><div class="text-xs text-accent font-semibold">08 Jan 2024 • Investment</div><h3 class="mt-2 text-[18px] font-semibold leading-tight group-hover:text-accent">Top 5 cities for property investment in 2024</h3><span class="inline-flex mt-4 text-sm font-medium text-heading">Read More →</span></div></a>
+    <a href="#" class="group bg-white rounded-[20px] overflow-hidden shadow-[0_4px_20px_rgba(21,32,70,.06)] hover:-translate-y-1 transition"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600" class="h-56 w-full object-cover group-hover:scale-105 transition duration-500"><div class="p-6"><div class="text-xs text-accent font-semibold">02 Jan 2024 • Tips</div><h3 class="mt-2 text-[18px] font-semibold leading-tight group-hover:text-accent">Virtual tours: the future of house hunting</h3><span class="inline-flex mt-4 text-sm font-medium text-heading">Read More →</span></div></a>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <h2 class="text-2xl font-bold">We Are Available in Many Cities</h2>
-  <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6" id="citiesGrid"></div>
-</section>
-
-<section class="bg-zinc-900 text-white py-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-    <h3 class="text-2xl font-bold">Let's Find Your Dream House with Dreamwell!</h3>
-    <a href="properties.html" class="px-6 py-3 rounded-full bg-white text-zinc-900 font-medium">View More</a>
+<!-- FAQ -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <h2 class="text-center text-[36px] font-semibold">Frequently Asked Questions</h2>
+  <div class="max-w-3xl mx-auto mt-8 space-y-3" id="faq">
+    <div class="faq-item bg-white rounded-2xl border overflow-hidden"><button class="faq-btn w-full flex items-center justify-between p-5 text-left font-semibold text-heading">How do I schedule a viewing? <i class="fa-solid fa-chevron-down text-xs transition"></i></button><div class="faq-body hidden px-5 pb-5 text-sm leading-7">Simply click "Contact Agent" on any property page or use the search form. Our agents reply within 2 hours and can arrange physical or virtual tours.</div></div>
+    <div class="faq-item bg-white rounded-2xl border overflow-hidden"><button class="faq-btn w-full flex items-center justify-between p-5 text-left font-semibold text-heading">Are virtual tours really 360°? <i class="fa-solid fa-chevron-down text-xs transition"></i></button><div class="faq-body hidden px-5 pb-5 text-sm leading-7">Yes — we use pannellum.js with equirectangular panoramas. On property details, click "Start Virtual Tour" to walk through the home right in your browser.</div></div>
+    <div class="faq-item bg-white rounded-2xl border overflow-hidden"><button class="faq-btn w-full flex items-center justify-between p-5 text-left font-semibold text-heading">What fees do you charge? <i class="fa-solid fa-chevron-down text-xs transition"></i></button><div class="faq-body hidden px-5 pb-5 text-sm leading-7">No hidden fees. For renters, first month + deposit. For buyers, our commission is transparent and shown before signing.</div></div>
   </div>
 </section>
 
-<footer class="bg-zinc-900 text-zinc-400">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid md:grid-cols-4 gap-8 text-sm">
-    <div><div class="text-white font-semibold mb-3">Dreamwell</div><p id="footerAddr" class="leading-6 text-zinc-500">Realtor Office Building 5F, 123 Anywhere St.</p></div>
-    <div><div class="text-white font-medium mb-3">Quick Links</div><ul class="space-y-2"><li>About Us</li><li>Privacy Policy</li><li>Terms</li></ul></div>
-    <div><div class="text-white font-medium mb-3">Discover</div><ul class="space-y-2"><li>Asia</li><li>Europe</li><li>America</li></ul></div>
-    <div><div class="text-white font-medium mb-3">Subscribe</div><div class="flex gap-2"><input placeholder="Email" class="flex-1 rounded-full px-4 py-2 bg-zinc-800 border border-zinc-700"><button class="px-5 py-2 rounded-full bg-white text-zinc-900 font-medium">Subscribe</button></div></div>
+<!-- CTA -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+  <div class="bg-heading rounded-[25px] px-6 lg:px-12 py-10 flex flex-col lg:flex-row items-center justify-between gap-6 relative overflow-hidden">
+    <div class="absolute right-0 top-0 h-full w-1/2 opacity-10 hidden lg:block" style="background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800') center/cover"></div>
+    <h3 class="relative text-white text-[24px] lg:text-[32px] font-bold leading-tight max-w-xl">Let's Find Your Dream House with Dreamwell!</h3>
+    <a href="properties.html" class="relative shrink-0 inline-flex px-8 py-3 rounded-full bg-accent text-white font-semibold hover:bg-white hover:text-heading transition">View More <i class="fa-solid fa-arrow-right ml-2"></i></a>
   </div>
-  <div class="border-t border-zinc-800 text-center py-6 text-xs">© 2024 Dreamwell. All rights reserved.</div>
+</section>
+
+<!-- Footer -->
+<footer id="contact" class="mt-16 bg-[#0D0D0D] text-zinc-400">
+  <div class="max-w-[1620px] mx-auto px-4 lg:px-6 py-12 grid md:grid-cols-2 lg:grid-cols-4 gap-10 text-sm">
+    <div>
+      <div class="flex items-center gap-2 text-white font-heading font-bold text-xl"><span class="h-8 w-8 rounded-lg bg-accent grid place-items-center text-white text-sm"><i class="fa-solid fa-house"></i></span> Dreamwell</div>
+      <p id="footerAddr" class="mt-4 leading-6 text-zinc-500">Realtor Office Building 5F, 123 Anywhere St. — +44 454 7800 112</p>
+      <div class="flex gap-3 mt-6"><a href="#" class="h-9 w-9 rounded-full bg-white/10 grid place-items-center hover:bg-accent hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="h-9 w-9 rounded-full bg-white/10 grid place-items-center hover:bg-accent hover:text-white transition"><i class="fa-brands fa-instagram"></i></a><a href="#" class="h-9 w-9 rounded-full bg-white/10 grid place-items-center hover:bg-accent hover:text-white transition"><i class="fa-brands fa-x-twitter"></i></a><a href="#" class="h-9 w-9 rounded-full bg-white/10 grid place-items-center hover:bg-accent hover:text-white transition"><i class="fa-brands fa-linkedin-in"></i></a></div>
+    </div>
+    <div><div class="text-white font-semibold mb-4">Quick Links</div><ul class="space-y-3"><li><a href="#" class="hover:text-accent">About Us</a></li><li><a href="#" class="hover:text-accent">Property</a></li><li><a href="#" class="hover:text-accent">Pricing</a></li><li><a href="properties.html" class="hover:text-accent">Our Listing</a></li></ul></div>
+    <div><div class="text-white font-semibold mb-4">Discover</div><ul class="space-y-3"><li>Asia</li><li>Europe</li><li>America</li><li>Africa</li></ul></div>
+    <div><div class="text-white font-semibold mb-4">Subscribe</div><p class="text-xs leading-6 mb-3">Get the latest listing updates</p><div class="flex gap-2"><input id="subEmail" placeholder="Your Email" class="flex-1 rounded-full px-4 py-2.5 bg-white/10 border border-white/10 text-white placeholder:text-zinc-500 text-sm"><button onclick="if(document.getElementById('subEmail').value) alert('Subscribed: '+document.getElementById('subEmail').value)" class="px-6 py-2.5 rounded-full bg-accent text-white font-medium hover:bg-white hover:text-heading transition">Subscribe</button></div></div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="max-w-[1620px] mx-auto px-4 lg:px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+      <div>© 2024 Dreamwell. All rights reserved.</div><div class="flex gap-6"><a href="#" class="hover:text-accent">Privacy Policy</a><a href="#" class="hover:text-accent">Terms of Service</a></div>
+    </div>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="assets/app.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const s = getSettings();
-  document.getElementById('heroTitle').textContent = s.siteTagline;
-  document.getElementById('footerAddr').textContent = s.contactAddress + ' — ' + s.contactPhone;
-  const feat = getProperties().filter(p=>p.featured);
-  document.getElementById('featuredGrid').innerHTML = feat.map(p=>`<div class="swiper-slide">${cardHTML(p)}</div>`).join('');
-  new Swiper('.swiper',{slidesPerView:1,spaceBetween:16,breakpoints:{640:{slidesPerView:2},1024:{slidesPerView:4}},pagination:{el:'.swiper-pagination',clickable:true},autoplay:{delay:3500,disableOnInteraction:false},loop:true});
-  const cities = [{name:'Singapore',count:87,img:'https://images.unsplash.com/photo-1525625293386-3f8f993a477f?w=400'},{name:'Bali',count:130,img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400'},{name:'London',count:56,img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400'},{name:'New York',count:62,img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400'},{name:'Los Angeles',count:125,img:'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=400'},{name:'Jakarta',count:147,img:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400'}];
-  document.getElementById('citiesGrid').innerHTML = cities.map(c=>`<a href="properties.html" class="relative h-36 rounded-2xl overflow-hidden group"><img src="${c.img}" class="h-full w-full object-cover group-hover:scale-105 transition"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-3 left-3 text-white"><div class="font-semibold text-sm">${c.name}</div><div class="text-xs opacity-80">${c.count} properties</div></div></a>`).join('');
+document.getElementById('preloader').style.display='none';
+document.getElementById('mMenuBtn').addEventListener('click',()=>document.getElementById('mMenu').classList.toggle('hidden'));
+document.getElementById('advBtn').addEventListener('click',()=>document.getElementById('advWrap').classList.toggle('open'));
+document.getElementById('priceRange').addEventListener('input',e=>document.getElementById('priceVal').textContent=e.target.value==1000000?'$1M+':'$'+Number(e.target.value).toLocaleString());
+document.querySelectorAll('#heroTabs li').forEach(li=>li.addEventListener('click',()=>{
+  document.querySelectorAll('#heroTabs li').forEach(x=>{x.className='px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border hover:bg-accent hover:text-white transition'});
+  li.className='px-6 py-2.5 rounded-full bg-accent text-white text-sm font-semibold cursor-pointer shadow';
+}));
+document.getElementById('heroForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const type=document.getElementById('heroType').value;
+  const city=document.getElementById('heroLoc').value;
+  const q=new URLSearchParams();
+  if(type) q.set('type',type);
+  if(city) q.set('city',city);
+  location.href='properties.html?'+q.toString();
 });
+document.querySelectorAll('.faq-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  const body=btn.nextElementSibling;
+  const icon=btn.querySelector('i');
+  body.classList.toggle('hidden');
+  icon.style.transform=body.classList.contains('hidden')?'rotate(0deg)':'rotate(180deg)';
+}));
+
 function cardHTML(p){
-  return `<a href="property.html?id=${p.id}" class="group bg-white rounded-2xl overflow-hidden border border-zinc-100 hover:shadow-xl transition"><div class="relative h-52 overflow-hidden"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status}</span><span class="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full bg-white/90 backdrop-blur font-medium">${p.type}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1">${p.title}</h3><p class="text-xs text-zinc-500 mt-1 line-clamp-1">${p.location}</p><div class="flex items-center gap-2 mt-3 text-xs text-zinc-600"><span>${p.beds} beds</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.baths} baths</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.sqft} sqft</span></div><div class="mt-4 flex items-center justify-between"><span class="font-bold">${p.priceLabel}</span><span class="text-xs text-violet-600 font-medium">View →</span></div></div></a>`;
+  const garage = p.garages || (p.garage??'no garage');
+  const garageLabel = typeof garage==='number' ? garage+' garage' : garage;
+  return `<div class="swiper-slide !h-auto"><a href="property.html?id=${p.id}" class="group bg-white rounded-[15px] overflow-hidden border border-zinc-100 hover:shadow-[0_12px_40px_rgba(21,32,70,.12)] transition flex flex-col h-full relative">
+    <div class="relative h-[220px] overflow-hidden rounded-[15px] m-2 mb-0"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><button onclick="event.preventDefault(); toggleWishlist('${p.id}', this)" class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white grid place-items-center text-accent shadow hover:bg-accent hover:text-white transition"><i class="${isWish(p.id)?'fa-solid':'fa-regular'} fa-heart text-xs"></i></button></div>
+    <div class="p-5 flex-1 flex flex-col">
+      <h3 class="font-semibold text-[18px] leading-tight text-heading line-clamp-1 group-hover:text-accent">${p.title}</h3>
+      <p class="text-xs mt-1 flex items-center gap-1 text-body"><i class="fa-solid fa-location-dot text-accent"></i> ${p.location}</p>
+      <ul class="flex flex-wrap gap-x-3 gap-y-1 mt-3 text-xs text-body border-y py-3">
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-bed"></i></span> ${p.beds} beds</li>
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-warehouse"></i></span> ${garageLabel}</li>
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-bath"></i></span> ${p.baths} baths</li>
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-ruler-combined"></i></span> ${p.sqft} sqft</li>
+      </ul>
+      <div class="mt-4 flex items-center justify-between">
+        <div><div class="text-xs text-body">${p.status}</div><div class="font-bold text-heading text-[18px]">${p.priceLabel}</div></div>
+        <span class="h-9 w-9 rounded-[7px] bg-accent text-white grid place-items-center group-hover:bg-heading transition"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+      </div>
+    </div>
+  </a></div>`;
 }
+function plistCard(p){
+  const garage = p.garages || (p.garage??'no garage');
+  const garageLabel = typeof garage==='number' ? garage+' garage' : garage;
+  return `<a href="property.html?id=${p.id}" class="group bg-white rounded-[15px] overflow-hidden border border-zinc-100 hover:shadow-[0_12px_40px_rgba(21,32,70,.12)] transition flex flex-col relative">
+    <div class="relative h-[220px] overflow-hidden rounded-[15px] m-2 mb-0"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><button onclick="event.preventDefault(); toggleWishlist('${p.id}', this)" class="absolute top-3 right-3 h-8 w-8 rounded-full bg-white grid place-items-center text-accent shadow"><i class="${isWish(p.id)?'fa-solid':'fa-regular'} fa-heart text-xs"></i></button></div>
+    <div class="p-5 flex-1 flex flex-col">
+      <h3 class="font-semibold text-heading line-clamp-1 group-hover:text-accent">${p.title}</h3>
+      <p class="text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-location-dot text-accent"></i> ${p.location}</p>
+      <ul class="flex flex-wrap gap-x-3 gap-y-1 mt-3 text-xs border-y py-3">
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-bed"></i></span> ${p.beds} beds</li>
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-warehouse"></i></span> ${garageLabel}</li>
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-bath"></i></span> ${p.baths} baths</li>
+        <li class="flex items-center gap-1"><span class="text-accent"><i class="fa-solid fa-ruler-combined"></i></span> ${p.sqft} sqft</li>
+      </ul>
+      <div class="mt-4 flex items-center justify-between"><div><div class="text-xs">${p.status}</div><div class="font-bold text-heading">${p.priceLabel}</div></div><span class="h-9 w-9 rounded-[7px] bg-accent text-white grid place-items-center"><i class="fa-solid fa-arrow-right text-xs"></i></span></div>
+    </div>
+  </a>`;
+}
+function isWish(id){ try{return JSON.parse(localStorage.getItem('dw_wish')||'[]').includes(id)}catch{return false}}
+function toggleWishlist(id, btn){
+  let w=JSON.parse(localStorage.getItem('dw_wish')||'[]');
+  w=w.includes(id)?w.filter(x=>x!==id):[...w,id];
+  localStorage.setItem('dw_wish',JSON.stringify(w));
+  const icon=btn.querySelector('i');
+  icon.className=(w.includes(id)?'fa-solid':'fa-regular')+' fa-heart text-xs';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const s=getSettings();
+  document.getElementById('footerAddr').textContent=s.contactAddress+' — '+s.contactPhone;
+  const all=getProperties();
+  const feat=all.filter(p=>p.featured);
+  document.getElementById('featuredGrid').innerHTML=feat.map(cardHTML).join('');
+  const featSwiper=new Swiper('#featSwiper',{slidesPerView:1,spaceBetween:16,breakpoints:{640:{slidesPerView:2},1024:{slidesPerView:3},1400:{slidesPerView:4}},pagination:{el:'#featSwiper .swiper-pagination',clickable:true},navigation:{nextEl:'#featNext',prevEl:'#featPrev'},loop:true,autoplay:{delay:4000}});
+
+  const plistGrid=document.getElementById('plistGrid');
+  function renderPlist(filter){
+    let list=all;
+    if(filter!=='all') list=all.filter(p=>p.status===filter);
+    plistGrid.innerHTML=list.slice(0,8).map(plistCard).join('');
+  }
+  renderPlist('all');
+  document.querySelectorAll('.plistTab').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.plistTab').forEach(x=>{x.className='px-6 py-2 rounded-full text-sm font-medium text-heading hover:bg-accent hover:text-white transition'});
+    b.className='px-6 py-2 rounded-full bg-accent text-white text-sm font-medium';
+    renderPlist(b.dataset.plist);
+  }));
+
+  const cities=[{name:'Singapore',count:87,img:'https://images.unsplash.com/photo-1525625293386-3f8f993a477f?w=600'},{name:'Bali',count:130,img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600'},{name:'London',count:56,img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600'},{name:'New York',count:62,img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600'},{name:'Los Angeles',count:125,img:'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=600'},{name:'Jakarta',count:147,img:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600'}];
+  document.getElementById('citiesGrid').innerHTML=cities.map(c=>`<a href="properties.html?city=${c.name}" class="relative h-[200px] rounded-[20px] overflow-hidden group block"><img src="${c.img}" class="h-full w-full object-cover group-hover:scale-110 transition duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div><div class="absolute bottom-4 left-4 text-white"><div class="font-semibold">${c.name}</div><div class="text-xs opacity-80">${c.count} properties</div></div></a>`).join('');
+
+  new Swiper('#testiSwiper',{slidesPerView:1,spaceBetween:20,breakpoints:{768:{slidesPerView:2},1024:{slidesPerView:3}},pagination:{el:'#testiSwiper .swiper-pagination',clickable:true},autoplay:{delay:3500},loop:true});
+});
 </script>
 </body>
 </html>
