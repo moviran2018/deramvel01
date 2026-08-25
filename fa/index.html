@@ -6,9 +6,25 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Golos+Text:wght@600;700&display=swap" rel="stylesheet">
 <script>tailwind.config={theme:{extend:{colors:{accent:'#19CF79',heading:'#152046',body:'#636363',muted:'#F5F7FA'},fontFamily:{heading:['Golos Text','Vazirmatn','sans-serif'],body:['Vazirmatn','sans-serif']}}}}</script>
-<style>body{font-family:'Vazirmatn',sans-serif;background:#F5F7FA;color:#636363}h1,h2,h3{font-family:'Vazirmatn',sans-serif;color:#152046}.hero-bg{background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat} .adv-wrap{max-height:0;opacity:0;overflow:hidden;transition:all .35s ease} .adv-wrap.open{max-height:600px;opacity:1;margin-top:16px;padding-top:16px;border-top:1px solid #F0F0F0}</style>
+<style>
+body{font-family:'Vazirmatn',sans-serif;background:#F5F7FA;color:#636363}h1,h2,h3{font-family:'Vazirmatn',sans-serif;color:#152046}.hero-bg{background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat} .adv-wrap{max-height:0;opacity:0;overflow:hidden;transition:all .35s ease} .adv-wrap.open{max-height:600px;opacity:1;margin-top:16px;padding-top:16px;border-top:1px solid #F0F0F0}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulseGlow{0%{box-shadow:0 0 0 0 rgba(25,207,121,.35)}70%{box-shadow:0 0 0 12px rgba(25,207,121,0)}100%{box-shadow:0 0 0 0 rgba(25,207,121,0)}}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(6px,-6px) rotate(1deg)}50%{transform:translate(-4px,-8px) rotate(-1deg)}75%{transform:translate(-6px,4px) rotate(1deg)}}
+.float-anim{animation:float 3.2s ease-in-out infinite}
+.pulse-badge{animation:pulseGlow 2.2s infinite}
+.drift{animation:drift 7s ease-in-out infinite}
+.prop-card{transition:transform .32s cubic-bezier(.4,0,.2,1),box-shadow .32s}
+.prop-card:hover{transform:translateY(-8px);box-shadow:0 18px 36px rgba(21,32,70,.08)}
+.prop-card:hover .icon-float{animation:float 1.6s ease-in-out infinite}
+#heroParallax{will-change:transform;transform:translate3d(0,0,0) scale(1.05)}
+.cities-swiper .swiper-slide{height:auto}
+@media (prefers-reduced-motion:reduce){.float-anim,.drift,.pulse-badge{animation:none!important}#heroParallax{transform:none!important}}
+.swiper-pagination-bullet-active{background:#19CF79!important}
+</style>
 </head>
 <body class="bg-[#F5F7FA]">
 <div id="preloader" class="fixed inset-0 bg-white z-[999] grid place-items-center"><div class="h-14 w-14 rounded-full bg-accent grid place-items-center text-white animate-pulse"><i class="fa-solid fa-house"></i></div></div>
@@ -28,15 +44,30 @@
   </div>
 </header>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-6">
-  <div class="hero-bg rounded-[25px] min-h-[520px] lg:min-h-[620px] flex flex-col items-center justify-center text-center px-6 py-16 relative overflow-hidden">
-    <div class="absolute inset-0 bg-black/10 rounded-[25px]"></div>
-    <div class="relative z-10 max-w-3xl">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-6" data-aos="fade-up">
+  <div id="heroWrap" class="rounded-[25px] min-h-[520px] lg:min-h-[620px] flex flex-col items-center justify-center text-center px-6 py-16 relative overflow-hidden">
+    <div id="heroParallax" class="absolute inset-0 rounded-[25px]" style="background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat"></div>
+    <div class="absolute inset-0 bg-black/15 rounded-[25px]"></div>
+    <!-- Floating For Sale badge -->
+    <div class="absolute top-5 left-5 lg:top-7 lg:left-7 bg-white rounded-full pl-4 pr-2 py-2 shadow-[0_8px_24px_rgba(0,0,0,.14)] hidden md:flex items-center gap-2.5 z-20 float-anim pulse-badge">
+      <span class="text-xs font-medium text-body">۱۲۰۰+ آگهی</span>
+      <span class="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span>
+      <span class="text-[13px] font-bold text-heading">فروش ویژه</span>
+      <span class="h-8 w-8 rounded-full bg-accent text-white grid place-items-center text-xs"><i class="fa-solid fa-tag"></i></span>
+    </div>
+    <!-- Floating key -->
+    <div id="floatKey" class="absolute bottom-8 right-6 lg:bottom-10 lg:right-8 hidden md:flex h-[66px] w-[66px] rounded-[18px] bg-white/95 backdrop-blur shadow-[0_12px_32px_rgba(0,0,0,.16)] items-center justify-center text-accent drift z-20" style="animation-delay:.35s">
+      <i class="fa-solid fa-key text-[20px]"></i>
+    </div>
+    <div id="floatHouse" class="absolute top-[18%] right-[6%] hidden xl:grid place-items-center h-14 w-14 rounded-2xl bg-white/85 backdrop-blur shadow-lg text-accent/60 drift z-20" style="animation-delay:.85s">
+      <i class="fa-regular fa-house text-lg"></i>
+    </div>
+    <div class="relative z-10 max-w-3xl" data-aos="fade-up" data-aos-delay="120">
       <h1 class="text-[38px] lg:text-[54px] font-bold leading-[1.15] text-white">بهترین خانه را برای زندگی‌ات <span class="text-accent">پیدا کن</span></h1>
       <p class="mt-6 text-white/90 text-lg">با مشاوران حرفه‌ای، هیچ خانه‌ای دور از دسترس نیست</p>
     </div>
   </div>
-  <div class="max-w-5xl mx-auto -mt-14 relative z-20 px-2">
+  <div class="max-w-5xl mx-auto -mt-14 relative z-20 px-2" data-aos="fade-up" data-aos-delay="200">
     <ul id="heroTabs" class="flex items-center justify-center gap-2 mb-3">
       <li data-tab="buy" class="px-6 py-2.5 rounded-full bg-accent text-white text-sm font-semibold cursor-pointer shadow">خرید</li>
       <li data-tab="rent" class="px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border">اجاره</li>
@@ -60,26 +91,26 @@
   </div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
-  <h2 class="text-center text-[32px] lg:text-[44px] font-bold">انواع ملک را کشف کنید</h2>
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
+  <h2 class="text-center text-[32px] lg:text-[44px] font-bold" data-aos="fade-up" data-aos-delay="60">انواع ملک را کشف کنید</h2>
   <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-10">
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow hover:-translate-y-1 transition"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-house"></i></span><div class="mt-3 text-xs font-medium text-heading">خانه</div></a>
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow hover:-translate-y-1 transition"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-building"></i></span><div class="mt-3 text-xs font-medium">آپارتمان</div></a>
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow hover:-translate-y-1 transition"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-warehouse"></i></span><div class="mt-3 text-xs font-medium">ویلا</div></a>
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-house-chimney"></i></span><div class="mt-3 text-xs font-medium">بنگلو</div></a>
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-city"></i></span><div class="mt-3 text-xs font-medium">تاون‌هاوس</div></a>
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-door-open"></i></span><div class="mt-3 text-xs font-medium">لافت</div></a>
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-briefcase"></i></span><div class="mt-3 text-xs font-medium">اداری</div></a>
-    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow"><span class="h-14 w-14 mx-auto grid place-items-center rounded-full bg-heading text-white"><i class="fa-solid fa-plus"></i></span><div class="mt-3 text-xs font-medium">بیشتر</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="0"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-house"></i></span><div class="mt-3 text-xs font-medium text-heading">خانه</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="50"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-building"></i></span><div class="mt-3 text-xs font-medium">آپارتمان</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="100"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-warehouse"></i></span><div class="mt-3 text-xs font-medium">ویلا</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="150"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-house-chimney"></i></span><div class="mt-3 text-xs font-medium">بنگلو</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="200"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-city"></i></span><div class="mt-3 text-xs font-medium">تاون‌هاوس</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="250"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-door-open"></i></span><div class="mt-3 text-xs font-medium">لافت</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="300"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-briefcase"></i></span><div class="mt-3 text-xs font-medium">اداری</div></a>
+    <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="350"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-heading text-white"><i class="fa-solid fa-plus"></i></span><div class="mt-3 text-xs font-medium">بیشتر</div></a>
   </div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
-  <div class="flex items-center justify-between"><h2 class="text-[28px] font-bold">املاک ویژه</h2><a href="properties.html" class="text-sm text-accent">مشاهده همه ←</a></div>
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
+  <div class="flex items-center justify-between"><h2 class="text-[28px] font-bold">املاک ویژه</h2><div class="flex items-center gap-2"><button id="featPrev" class="h-9 w-9 rounded-full bg-white border shadow grid place-items-center text-heading hover:bg-accent hover:text-white transition"><i class="fa-solid fa-arrow-right text-xs"></i></button><button id="featNext" class="h-9 w-9 rounded-full bg-white border shadow grid place-items-center text-heading hover:bg-accent hover:text-white transition"><i class="fa-solid fa-arrow-left text-xs"></i></button><a href="properties.html" class="text-sm text-accent mr-2 hidden md:inline">مشاهده همه ←</a></div></div>
   <div class="swiper mt-6 !pb-10" id="featSwiper"><div class="swiper-wrapper" id="featuredGrid"></div><div class="swiper-pagination"></div></div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-8">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-8" data-aos="fade-up">
   <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
     <h2 class="text-[28px] font-bold">آگهی‌های محبوب</h2>
     <div class="flex gap-2 p-1 bg-white rounded-full border w-fit"><button data-plist="all" class="plistTab px-6 py-2 rounded-full bg-accent text-white text-sm">همه</button><button data-plist="For Rent" class="plistTab px-6 py-2 rounded-full text-sm">اجاره</button><button data-plist="For Sale" class="plistTab px-6 py-2 rounded-full text-sm">فروش</button></div>
@@ -87,33 +118,38 @@
   <div id="plistGrid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8"></div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
   <h2 class="text-center text-[32px] font-bold">در شهرهای زیادی در دسترسیم</h2>
-  <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mt-10" id="citiesGrid"></div>
+  <p class="text-center mt-3 text-sm">خانه ایده‌آل خود را در شهر محبوب‌تان پیدا کنید</p>
+  <div class="relative mt-10">
+    <div class="swiper cities-swiper !pb-10" id="citiesSwiper"><div class="swiper-wrapper" id="citiesGrid"></div><div class="swiper-pagination"></div></div>
+    <button id="citiesPrev" aria-label="قبلی" class="hidden lg:grid absolute -right-5 top-[42%] -translate-y-1/2 h-11 w-11 rounded-full bg-white border shadow-md place-items-center text-heading hover:bg-accent hover:text-white transition z-10"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+    <button id="citiesNext" aria-label="بعدی" class="hidden lg:grid absolute -left-5 top-[42%] -translate-y-1/2 h-11 w-11 rounded-full bg-white border shadow-md place-items-center text-heading hover:bg-accent hover:text-white transition z-10"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+  </div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
   <div class="bg-white rounded-[25px] p-6 lg:p-10 grid lg:grid-cols-2 gap-10 items-center shadow">
-    <div class="relative rounded-[20px] overflow-hidden h-[380px]"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" class="h-full w-full object-cover"><div class="absolute bottom-4 right-4 bg-white rounded-2xl p-3 flex items-center gap-3 shadow-xl"><img src="https://i.pravatar.cc/100?img=12" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold text-heading">جِی اچ. شفیلد</div><div class="text-xs">مشتری</div></div></div></div>
+    <div class="relative rounded-[20px] overflow-hidden h-[380px]"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" class="h-full w-full object-cover" loading="lazy"><div class="absolute bottom-4 right-4 bg-white rounded-2xl p-3 flex items-center gap-3 shadow-xl drift hidden md:flex" style="animation-duration:6s"><img src="https://i.pravatar.cc/100?img=12" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold text-heading">جِی اچ. شفیلد</div><div class="text-xs">مشتری</div></div></div></div>
     <div><span class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold">درباره ما</span><h2 class="mt-4 text-[28px] font-bold leading-tight">خدمات دوستانه و مشتری‌محور</h2><p class="mt-4 text-sm leading-7">تمرکز ما بر ساخت روابط بلندمدت و تضمین تجربه‌ای روان و شفاف در خرید و اجاره ملک است.</p><ul class="mt-6 space-y-3 text-sm"><li class="flex gap-3"><span class="h-6 w-6 rounded-full bg-accent text-white grid place-items-center text-xs"><i class="fa-solid fa-check"></i></span> راهنمایی تخصصی از مشاوران محلی</li><li class="flex gap-3"><span class="h-6 w-6 rounded-full bg-accent text-white grid place-items-center text-xs"><i class="fa-solid fa-check"></i></span> آگهی‌های تاییدشده با تور مجازی</li></ul><a href="properties.html" class="inline-flex mt-8 px-7 py-3 rounded-[7px] bg-accent text-white font-medium">بیشتر ببینید</a></div>
   </div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
   <h2 class="text-center text-[32px] font-bold">چطور کار می‌کند</h2>
   <div class="grid md:grid-cols-3 gap-6 mt-10">
-    <div class="bg-white rounded-[20px] p-8 text-center shadow"><div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-xl"><i class="fa-solid fa-magnifying-glass"></i></div><h3 class="mt-4 font-semibold">جستجوی ملک</h3><p class="mt-2 text-sm">هزاران آگهی تاییدشده با فیلتر پیشرفته</p></div>
-    <div class="bg-white rounded-[20px] p-8 text-center shadow"><div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-xl"><i class="fa-solid fa-handshake"></i></div><h3 class="mt-4 font-semibold">ملاقات با مشاور</h3><p class="mt-2 text-sm">تور حضوری و مجازی با کارشناسان</p></div>
-    <div class="bg-white rounded-[20px] p-8 text-center shadow"><div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-xl"><i class="fa-solid fa-key"></i></div><h3 class="mt-4 font-semibold">تحویل خانه</h3><p class="mt-2 text-sm">از قرارداد تا جابجایی همراه شما</p></div>
+    <div class="bg-white rounded-[20px] p-8 text-center shadow" data-aos="fade-up" data-aos-delay="0"><div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-xl"><i class="fa-solid fa-magnifying-glass"></i></div><h3 class="mt-4 font-semibold">جستجوی ملک</h3><p class="mt-2 text-sm">هزاران آگهی تاییدشده با فیلتر پیشرفته</p></div>
+    <div class="bg-white rounded-[20px] p-8 text-center shadow" data-aos="fade-up" data-aos-delay="100"><div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-xl"><i class="fa-solid fa-handshake"></i></div><h3 class="mt-4 font-semibold">ملاقات با مشاور</h3><p class="mt-2 text-sm">تور حضوری و مجازی با کارشناسان</p></div>
+    <div class="bg-white rounded-[20px] p-8 text-center shadow" data-aos="fade-up" data-aos-delay="200"><div class="h-16 w-16 mx-auto rounded-2xl bg-accent/10 text-accent grid place-items-center text-xl"><i class="fa-solid fa-key"></i></div><h3 class="mt-4 font-semibold">تحویل خانه</h3><p class="mt-2 text-sm">از قرارداد تا جابجایی همراه شما</p></div>
   </div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
   <h2 class="text-center text-[28px] font-bold">نظر مشتریان</h2>
-  <div class="swiper mt-8 !pb-10" id="testiSwiper"><div class="swiper-wrapper"><div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow"><p class="text-sm leading-7">"دریم‌ول پیدا کردن آپارتمان را فوق‌العاده آسان کرد. تور مجازی واقع‌گرایانه بود!"</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=32" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold">سارا</div><div class="text-xs">سنگاپور</div></div></div></div></div><div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow"><p class="text-sm leading-7">"حرفه‌ای، سریع و شفاف. خانه‌ام را در دو هفته فروختند."</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=15" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold">مهدی</div><div class="text-xs">تهران</div></div></div></div></div><div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow"><p class="text-sm leading-7">"بهترین تجربه ملکی من بود. جستجوی پیشرفته زمان زیادی را نجات داد."</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=26" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold">آیشا</div><div class="text-xs">لندن</div></div></div></div></div></div><div class="swiper-pagination"></div></div>
+  <div class="swiper mt-8 !pb-10" id="testiSwiper"><div class="swiper-wrapper"><div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow"><div class="flex gap-1 text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="mt-4 text-sm leading-7">"دریم‌ول پیدا کردن آپارتمان را فوق‌العاده آسان کرد. تور مجازی واقع‌گرایانه بود!"</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=32" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold">سارا</div><div class="text-xs">سنگاپور</div></div></div></div></div><div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow"><div class="flex gap-1 text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="mt-4 text-sm leading-7">"حرفه‌ای، سریع و شفاف. خانه‌ام را در دو هفته فروختند."</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=15" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold">مهدی</div><div class="text-xs">تهران</div></div></div></div></div><div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow"><div class="flex gap-1 text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="mt-4 text-sm leading-7">"بهترین تجربه ملکی من بود. جستجوی پیشرفته زمان زیادی را نجات داد."</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=26" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold">آیشا</div><div class="text-xs">لندن</div></div></div></div></div><div class="swiper-slide"><div class="bg-white rounded-[20px] p-8 shadow"><div class="flex gap-1 text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="mt-4 text-sm leading-7">"از جستجو تا قرارداد همه چیز عالی پیش رفت. پیشنهاد می‌کنم!"</p><div class="flex items-center gap-3 mt-6"><img src="https://i.pravatar.cc/100?img=48" class="h-10 w-10 rounded-full"><div><div class="text-sm font-semibold">رضا</div><div class="text-xs">اصفهان</div></div></div></div></div></div><div class="swiper-pagination"></div></div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-8">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-8" data-aos="fade-up">
   <div class="bg-heading rounded-[25px] px-6 lg:px-12 py-10 flex flex-col lg:flex-row items-center justify-between gap-6">
     <h3 class="text-white text-[22px] lg:text-[28px] font-bold">خانه رویایی‌ات را با دریم‌ول پیدا کن!</h3><a href="properties.html" class="shrink-0 px-8 py-3 rounded-full bg-accent text-white font-semibold">مشاهده بیشتر</a>
   </div>
@@ -130,6 +166,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="../assets/app.js"></script>
 <script>
 document.getElementById('preloader').style.display='none';
@@ -139,19 +176,43 @@ document.querySelectorAll('#heroTabs li').forEach(li=>li.addEventListener('click
   li.className='px-6 py-2.5 rounded-full bg-accent text-white text-sm font-semibold cursor-pointer shadow';
 }));
 document.getElementById('heroForm').addEventListener('submit',e=>{e.preventDefault(); const city=document.getElementById('heroLoc').value; location.href='properties.html'+(city?'?city='+city:'');});
+AOS.init({duration:700,once:true,offset:80,easing:'ease-out-cubic',disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches});
+(function(){
+  const parallax=document.getElementById('heroParallax');
+  const floatKey=document.getElementById('floatKey');
+  const floatHouse=document.getElementById('floatHouse');
+  const heroWrap=document.getElementById('heroWrap');
+  if(!parallax||!heroWrap) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(ticking) return;
+    ticking=true;
+    requestAnimationFrame(()=>{
+      const rect=heroWrap.getBoundingClientRect();
+      if(rect.bottom>0 && rect.top < window.innerHeight){
+        const y=window.scrollY*0.08;
+        parallax.style.transform='translate3d(0,'+y+'px,0) scale(1.05)';
+        if(floatKey) floatKey.style.transform='translate3d(0,'+(-window.scrollY*0.04)+'px,0)';
+        if(floatHouse) floatHouse.style.transform='translate3d(0,'+(-window.scrollY*0.06)+'px,0)';
+      }
+      ticking=false;
+    });
+  },{passive:true});
+})();
 
 function cardHTML(p){
   const garage=p.garages||p.garage||'—';
   const gLabel=typeof garage==='number'?garage+' گاراژ':garage;
-  return `<div class="swiper-slide"><a href="../property.html?id=${p.id}" class="group bg-white rounded-[15px] overflow-hidden border hover:shadow-xl transition block"><div class="relative h-52 overflow-hidden rounded-[15px] m-2 mb-0"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition"><span class="absolute top-3 right-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status==='For Rent'?'اجاره':'فروش'}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1 text-heading">${p.title}</h3><p class="text-xs mt-1">${p.location}</p><div class="flex gap-2 mt-3 text-xs"><span>${p.beds} خواب</span><span>${p.baths} حمام</span><span>${p.sqft} متر</span></div><div class="mt-4 flex items-center justify-between"><span class="font-bold text-heading">${p.priceLabel}</span><span class="h-8 w-8 rounded-lg bg-accent text-white grid place-items-center"><i class="fa-solid fa-arrow-left text-xs"></i></span></div></div></a></div>`;
+  return `<div class="swiper-slide"><a href="../property.html?id=${p.id}" class="group bg-white rounded-[15px] overflow-hidden border hover:shadow-xl transition block"><div class="relative h-52 overflow-hidden rounded-[15px] m-2 mb-0"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition" loading="lazy"><span class="absolute top-3 right-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status==='For Rent'?'اجاره':'فروش'}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1 text-heading">${p.title}</h3><p class="text-xs mt-1">${p.location}</p><div class="flex gap-2 mt-3 text-xs"><span>${p.beds} خواب</span><span>${p.baths} حمام</span><span>${p.sqft} متر</span></div><div class="mt-4 flex items-center justify-between"><span class="font-bold text-heading">${p.priceLabel}</span><span class="h-8 w-8 rounded-lg bg-accent text-white grid place-items-center"><i class="fa-solid fa-arrow-left text-xs"></i></span></div></div></a></div>`;
 }
 function plistCard(p){
-  return `<a href="../property.html?id=${p.id}" class="group bg-white rounded-[15px] overflow-hidden border hover:shadow-xl transition"><div class="relative h-52 overflow-hidden rounded-[15px] m-2 mb-0"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition"><span class="absolute top-3 right-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status==='For Rent'?'اجاره':'فروش'}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1">${p.title}</h3><p class="text-xs mt-1">${p.location}</p><div class="mt-4 font-bold text-heading">${p.priceLabel}</div></div></a>`;
+  return `<a href="../property.html?id=${p.id}" class="group bg-white rounded-[15px] overflow-hidden border hover:shadow-xl transition"><div class="relative h-52 overflow-hidden rounded-[15px] m-2 mb-0"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition" loading="lazy"><span class="absolute top-3 right-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status==='For Rent'?'اجاره':'فروش'}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1">${p.title}</h3><p class="text-xs mt-1">${p.location}</p><div class="mt-4 font-bold text-heading">${p.priceLabel}</div></div></a>`;
 }
 document.addEventListener('DOMContentLoaded',()=>{
   const feat=getProperties().filter(p=>p.featured);
   document.getElementById('featuredGrid').innerHTML=feat.map(cardHTML).join('');
-  new Swiper('#featSwiper',{slidesPerView:1,spaceBetween:16,breakpoints:{640:{slidesPerView:2},1024:{slidesPerView:3},1400:{slidesPerView:4}},pagination:{el:'#featSwiper .swiper-pagination',clickable:true},loop:true,autoplay:{delay:3500}});
+  new Swiper('#featSwiper',{slidesPerView:1,spaceBetween:16,breakpoints:{640:{slidesPerView:2},1024:{slidesPerView:3},1400:{slidesPerView:4}},pagination:{el:'#featSwiper .swiper-pagination',clickable:true},navigation:{nextEl:'#featNext',prevEl:'#featPrev'},loop:true,autoplay:{delay:3500,disableOnInteraction:false,pauseOnMouseEnter:true}});
   const plistGrid=document.getElementById('plistGrid');
   function renderPlist(filter){
     let list=getProperties();
@@ -164,9 +225,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     b.className='px-6 py-2 rounded-full bg-accent text-white text-sm';
     renderPlist(b.dataset.plist);
   }));
-  const cities=[{name:'سنگاپور',en:'Singapore',count:87,img:'https://images.unsplash.com/photo-1525625293386-3f8f993a477f?w=600'},{name:'بالی',en:'Bali',count:130,img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600'},{name:'لندن',en:'London',count:56,img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600'},{name:'تهران',en:'Tehran',count:62,img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600'}];
-  document.getElementById('citiesGrid').innerHTML=cities.map(c=>`<a href="properties.html" class="relative h-36 rounded-2xl overflow-hidden group block"><img src="${c.img}" class="h-full w-full object-cover group-hover:scale-105 transition"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-3 right-3 text-white"><div class="font-semibold text-sm">${c.name}</div><div class="text-xs opacity-80">${c.count} ملک</div></div></a>`).join('');
-  new Swiper('#testiSwiper',{slidesPerView:1,spaceBetween:16,breakpoints:{768:{slidesPerView:2},1024:{slidesPerView:3}},pagination:{el:'#testiSwiper .swiper-pagination',clickable:true},loop:true,autoplay:{delay:3500}});
+  const cities=[{name:'سنگاپور',en:'Singapore',count:87,img:'https://images.unsplash.com/photo-1525625293386-3f8f993a477f?w=600'},{name:'بالی',en:'Bali',count:130,img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600'},{name:'لندن',en:'London',count:56,img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600'},{name:'نیویورک',en:'New York',count:62,img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600'},{name:'لس‌آنجلس',en:'Los Angeles',count:125,img:'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=600'},{name:'جاکارتا',en:'Jakarta',count:147,img:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600'}];
+  document.getElementById('citiesGrid').innerHTML=cities.map(c=>`<div class="swiper-slide !h-auto"><a href="properties.html?city=${c.en}" class="relative h-[190px] rounded-2xl overflow-hidden group block"><img src="${c.img}" class="h-full w-full object-cover group-hover:scale-110 transition duration-700" loading="lazy"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-3 right-3 text-white"><div class="font-semibold text-sm">${c.name}</div><div class="text-xs opacity-80">${c.count} ملک</div></div></a></div>`).join('');
+  new Swiper('#citiesSwiper',{slidesPerView:1.35,spaceBetween:14,breakpoints:{480:{slidesPerView:2,spaceBetween:14},640:{slidesPerView:2.5,spaceBetween:16},768:{slidesPerView:3,spaceBetween:16},1024:{slidesPerView:4,spaceBetween:16},1280:{slidesPerView:6,spaceBetween:16}},pagination:{el:'#citiesSwiper .swiper-pagination',clickable:true},navigation:{nextEl:'#citiesNext',prevEl:'#citiesPrev'},loop:false,watchOverflow:true});
+  new Swiper('#testiSwiper',{slidesPerView:1,spaceBetween:16,breakpoints:{768:{slidesPerView:2},1024:{slidesPerView:3}},pagination:{el:'#testiSwiper .swiper-pagination',clickable:true},loop:true,autoplay:{delay:3200,disableOnInteraction:false,pauseOnMouseEnter:true},speed:600});
 });
 </script>
 </body>
