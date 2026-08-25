@@ -5,6 +5,8 @@
 <title>Property Details — Dreamwell</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 <style>body{font-family:Inter,sans-serif}</style>
 </head>
 <body class="bg-zinc-50 text-zinc-900">
@@ -25,10 +27,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   const p=getProperties().find(x=>x.id===id);
   const el=document.getElementById('content');
   if(!p){ el.innerHTML=`<div class="text-center py-16">Not found — <a href="properties.html" class="text-violet-600">Back</a></div>`; return; }
+  const gallery = p.gallery || [p.image];
   el.innerHTML=`
     <div class="grid lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         <div class="h-[420px] rounded-3xl overflow-hidden bg-zinc-100"><img src="${p.image}" class="h-full w-full object-cover"></div>
+        <div class="grid grid-cols-3 gap-3 mt-3">${gallery.slice(0,3).map((g,i)=>`<img src="${g}" class="h-24 rounded-xl object-cover cursor-pointer hover:opacity-80" onclick="document.querySelector('#mainImg').src='${g}'" id="${i===0?'mainImg':''}">`).join('')}</div>
         <h1 class="text-2xl font-bold mt-6">${p.title}</h1>
         <p class="text-zinc-500 text-sm mt-1">${p.location} • ${p.type} • ${p.status}</p>
         <p class="mt-4 text-zinc-700 leading-7">${p.description}</p>
@@ -38,6 +42,23 @@ document.addEventListener('DOMContentLoaded',()=>{
           <span class="px-4 py-2 rounded-full bg-white border">${p.sqft} sqft</span>
           <span class="px-4 py-2 rounded-full bg-white border">${p.garages} garage</span>
         </div>
+        ${p.panorama ? `
+        <div class="mt-8 bg-white rounded-2xl border p-6">
+          <h3 class="font-semibold flex items-center gap-2">🏠 تور مجازی ۳۶۰ درجه <span class="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-700">سبک</span></h3>
+          <p class="text-xs text-zinc-500 mt-1">با موس بچرخ، زوم کن — انگار داخل ویلایی (فقط با کلیک لود می‌شود)</p>
+          <button id="tourBtn" class="mt-4 px-5 py-2.5 rounded-xl bg-zinc-900 text-white text-sm">شروع تور مجازی</button>
+          <div id="panorama" class="hidden mt-4 h-[380px] rounded-2xl overflow-hidden border"></div>
+        </div>`:''}
+        ${p.video ? `
+        <div class="mt-6 bg-white rounded-2xl border p-6">
+          <h3 class="font-semibold">ویدئو معرفی</h3>
+          <video controls preload="none" poster="${p.image}" class="mt-3 w-full rounded-xl"><source src="${p.video}" type="video/mp4"></video>
+        </div>`:''}
+        ${p.podcast ? `
+        <div class="mt-6 bg-white rounded-2xl border p-6">
+          <h3 class="font-semibold">پادکست توضیحات</h3>
+          <audio controls preload="none" class="mt-3 w-full"><source src="${p.podcast}" type="audio/mpeg"></audio>
+        </div>`:''}
       </div>
       <div class="bg-white rounded-2xl border p-6 h-fit sticky top-20">
         <div class="text-2xl font-bold">${p.priceLabel}</div>
@@ -50,6 +71,16 @@ document.addEventListener('DOMContentLoaded',()=>{
         <a href="admin/index.html" class="block text-center mt-3 text-xs text-violet-600">Edit in Admin →</a>
       </div>
     </div>`;
+  if(p.panorama){
+    const btn=document.getElementById('tourBtn');
+    const pano=document.getElementById('panorama');
+    btn.addEventListener('click',()=>{
+      btn.textContent='در حال لود...';
+      pano.classList.remove('hidden');
+      pannellum.viewer('panorama',{type:'equirectangular',panorama:p.panorama,autoLoad:true,showControls:true});
+      btn.style.display='none';
+    });
+  }
 });
 </script>
 </body>
