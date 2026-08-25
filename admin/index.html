@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Dreamwell</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+<header class="bg-white border-b sticky top-0 z-30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-xl bg-violet-600 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">Dreamwell Admin</span><span class="text-xs px-2 py-1 rounded-full bg-violet-100 text-violet-700">Minimal</span></a>
+    <a href="../index.html" class="text-sm text-zinc-600 hover:text-zinc-900">← View Site</a>
+  </div>
+</header>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex gap-2">
+    <button data-tab="properties" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-zinc-900 text-white">Properties</button>
+    <button data-tab="add" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-white border">Add / Edit</button>
+    <button data-tab="settings" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-white border">Site Settings</button>
+    <button data-tab="export" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-white border">Export</button>
+  </div>
+
+  <div id="tab-properties" class="tabPanel mt-6 bg-white rounded-2xl border overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-zinc-50 text-zinc-500 text-xs"><tr><th class="text-left p-3">Title</th><th class="text-left p-3">City</th><th class="text-left p-3">Price</th><th class="text-left p-3">Status</th><th class="p-3">Actions</th></tr></thead>
+        <tbody id="propsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-add" class="tabPanel hidden mt-6 bg-white rounded-2xl border p-6 grid md:grid-cols-2 gap-4">
+    <input id="fTitle" placeholder="Title" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fCity" placeholder="City" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fLocation" placeholder="Location (full address)" class="rounded-xl border px-3 py-2.5 text-sm md:col-span-2">
+    <input id="fPrice" type="number" placeholder="Price" class="rounded-xl border px-3 py-2.5 text-sm">
+    <select id="fStatus" class="rounded-xl border px-3 py-2.5 text-sm"><option>For Rent</option><option>For Sale</option></select>
+    <select id="fType" class="rounded-xl border px-3 py-2.5 text-sm"><option>House</option><option>Apartment</option><option>Villa</option><option>Townhouse</option><option>Office</option><option>Bungalow</option><option>Loft</option></select>
+    <input id="fBeds" type="number" placeholder="Beds" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fBaths" type="number" placeholder="Baths" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fSqft" type="number" placeholder="Sqft" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fImage" placeholder="Image URL" class="rounded-xl border px-3 py-2.5 text-sm">
+    <textarea id="fDesc" placeholder="Description" rows="3" class="rounded-xl border px-3 py-2.5 text-sm md:col-span-2"></textarea>
+    <label class="flex items-center gap-2 text-sm md:col-span-2"><input id="fFeatured" type="checkbox"> Featured on homepage</label>
+    <div class="md:col-span-2 flex gap-2">
+      <button id="saveBtn" class="px-6 py-3 rounded-xl bg-violet-600 text-white font-medium">Create Property</button>
+      <button id="cancelBtn" class="px-6 py-3 rounded-xl border hidden">Cancel</button>
+    </div>
+  </div>
+
+  <div id="tab-settings" class="tabPanel hidden mt-6 bg-white rounded-2xl border p-6 space-y-4 max-w-xl">
+    <div><label class="text-xs font-medium">Site Name</label><input id="sName" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">Tagline</label><input id="sTagline" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">Contact Email</label><input id="sEmail" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">Phone</label><input id="sPhone" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">Address</label><input id="sAddr" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <button id="saveSettings" class="px-6 py-2.5 rounded-xl bg-zinc-900 text-white text-sm font-medium">Save Settings</button>
+    <p class="text-xs text-zinc-500">ذخیره بلافاصله در کل سایت اعمال می‌شود — هدر، فوتر و هیرو بروز می‌شوند.</p>
+  </div>
+
+  <div id="tab-export" class="tabPanel hidden mt-6 bg-white rounded-2xl border p-6">
+    <h3 class="font-semibold">Export / Backup</h3>
+    <p class="text-sm text-zinc-500 mt-1">تمام داده‌ها در مرورگر ذخیره شده — برای بک‌اند واقعی، این JSON را به Supabase/Workers بفرست.</p>
+    <div class="mt-4 flex gap-2">
+      <button id="exportBtn" class="px-4 py-2 rounded-xl bg-zinc-900 text-white text-sm">Download JSON</button>
+      <button id="resetBtn" class="px-4 py-2 rounded-xl border text-sm text-red-600">Reset to Default</button>
+    </div>
+    <pre id="exportPreview" class="mt-4 bg-zinc-900 text-zinc-100 rounded-xl p-4 text-xs overflow-auto max-h-64"></pre>
+  </div>
+</div>
+
+<script src="../assets/app.js"></script>
+<script>
+let editingId=null;
+const els={title:document.getElementById('fTitle'),city:document.getElementById('fCity'),location:document.getElementById('fLocation'),price:document.getElementById('fPrice'),status:document.getElementById('fStatus'),type:document.getElementById('fType'),beds:document.getElementById('fBeds'),baths:document.getElementById('fBaths'),sqft:document.getElementById('fSqft'),image:document.getElementById('fImage'),desc:document.getElementById('fDesc'),featured:document.getElementById('fFeatured'),saveBtn:document.getElementById('saveBtn'),cancelBtn:document.getElementById('cancelBtn')};
+
+function renderTable(){
+  const tbody=document.getElementById('propsBody');
+  tbody.innerHTML=getProperties().map(p=>`<tr class="border-t"><td class="p-3 font-medium">${p.title}</td><td class="p-3">${p.city}</td><td class="p-3">${p.priceLabel}</td><td class="p-3"><span class="text-xs px-2 py-1 rounded-full ${p.status==='For Rent'?'bg-emerald-100 text-emerald-700':'bg-amber-100 text-amber-700'}">${p.status}</span></td><td class="p-3 flex gap-2 justify-center"><button onclick="editProp('${p.id}')" class="px-3 py-1 rounded-full bg-zinc-900 text-white text-xs">Edit</button><button onclick="delProp('${p.id}')" class="px-3 py-1 rounded-full border text-xs">Delete</button></td></tr>`).join('');
+  document.getElementById('exportPreview').textContent=JSON.stringify({settings:getSettings(),properties:getProperties()},null,2);
+}
+function editProp(id){
+  const p=getProperties().find(x=>x.id===id);
+  if(!p) return;
+  editingId=id;
+  els.title.value=p.title; els.city.value=p.city; els.location.value=p.location; els.price.value=p.price; els.status.value=p.status; els.type.value=p.type; els.beds.value=p.beds; els.baths.value=p.baths; els.sqft.value=p.sqft; els.image.value=p.image; els.desc.value=p.description; els.featured.checked=!!p.featured;
+  els.saveBtn.textContent='Update Property'; els.cancelBtn.classList.remove('hidden');
+  switchTab('add');
+}
+function delProp(id){
+  if(!confirm('Delete this property?')) return;
+  const list=getProperties().filter(x=>x.id!==id);
+  saveProperties(list); renderTable();
+}
+els.saveBtn.addEventListener('click',()=>{
+  if(!els.title.value || !els.location.value) return alert('Title and location required');
+  const data={title:els.title.value,city:els.city.value,location:els.location.value,price:Number(els.price.value),status:els.status.value,type:els.type.value,beds:Number(els.beds.value),baths:Number(els.baths.value),sqft:Number(els.sqft.value),image:els.image.value||'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600',description:els.desc.value,featured:els.featured.checked,priceLabel:els.status.value==='For Rent'?`$${Number(els.price.value).toLocaleString()} /month`:`$${Number(els.price.value).toLocaleString()}`};
+  let list=getProperties();
+  if(editingId){
+    list=list.map(x=>x.id===editingId?{...x,...data,slug:data.title.toLowerCase().replace(/\s+/g,'-')}:x);
+    editingId=null; els.saveBtn.textContent='Create Property'; els.cancelBtn.classList.add('hidden');
+  } else {
+    const id=Date.now().toString();
+    list=[{id,slug:data.title.toLowerCase().replace(/\s+/g,'-'),...data},...list];
+  }
+  saveProperties(list);
+  els.title.value=''; els.city.value=''; els.location.value=''; els.price.value=''; els.desc.value='';
+  renderTable(); switchTab('properties');
+});
+els.cancelBtn.addEventListener('click',()=>{ editingId=null; els.saveBtn.textContent='Create Property'; els.cancelBtn.classList.add('hidden'); els.title.value=''; });
+
+function switchTab(name){
+  document.querySelectorAll('.tabBtn').forEach(b=>{ b.className=b.dataset.tab===name?'px-4 py-2 rounded-full text-sm font-medium bg-zinc-900 text-white':'px-4 py-2 rounded-full text-sm font-medium bg-white border'; });
+  document.querySelectorAll('.tabPanel').forEach(p=>p.classList.toggle('hidden', p.id!==`tab-${name}`));
+}
+document.querySelectorAll('.tabBtn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+function loadSettings(){
+  const s=getSettings();
+  document.getElementById('sName').value=s.siteName;
+  document.getElementById('sTagline').value=s.siteTagline;
+  document.getElementById('sEmail').value=s.contactEmail;
+  document.getElementById('sPhone').value=s.contactPhone;
+  document.getElementById('sAddr').value=s.contactAddress;
+}
+document.getElementById('saveSettings').addEventListener('click',()=>{
+  const s={siteName:document.getElementById('sName').value,siteTagline:document.getElementById('sTagline').value,contactEmail:document.getElementById('sEmail').value,contactPhone:document.getElementById('sPhone').value,contactAddress:document.getElementById('sAddr').value};
+  saveSettings(s); alert('Saved!');
+});
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify({settings:getSettings(),properties:getProperties()},null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='dreamwell-backup.json'; a.click();
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{ if(confirm('Reset to default data?')){ localStorage.removeItem('dw_props'); localStorage.removeItem('dw_settings'); location.reload(); }});
+
+document.addEventListener('DOMContentLoaded',()=>{ renderTable(); loadSettings(); });
+</script>
+</body>
+</html>

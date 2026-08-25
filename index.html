@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dreamwell — Real Estate</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-lg bg-zinc-900 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">Dreamwell</span></a>
+    <nav class="hidden md:flex gap-6 text-sm"><a href="index.html" class="font-medium">Home</a><a href="properties.html" class="text-zinc-600 hover:text-zinc-900">Listing</a><a href="admin/index.html" class="text-violet-600 font-medium">Admin</a></nav>
+    <a href="admin/index.html" class="hidden md:inline-flex px-4 py-2 rounded-full bg-zinc-900 text-white text-sm">Add Property</a>
+  </div>
+</header>
+
+<section class="bg-white border-b">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid lg:grid-cols-2 gap-10 items-center">
+    <div>
+      <h1 id="heroTitle" class="text-4xl lg:text-5xl font-bold leading-tight">We provide the best house to be your home</h1>
+      <p class="mt-4 text-zinc-600">Together with professional agents, there is no house that you can't get.</p>
+      <div class="mt-6 bg-white border border-zinc-200 rounded-2xl p-4 shadow-sm flex flex-wrap gap-3">
+        <select id="heroLoc" class="flex-1 min-w-[140px] rounded-xl border border-zinc-200 px-3 py-3 text-sm"><option value="">Any Location</option><option>New York</option><option>London</option><option>Bali</option><option>Singapore</option></select>
+        <select class="flex-1 min-w-[140px] rounded-xl border border-zinc-200 px-3 py-3 text-sm"><option>Any Property</option><option>House</option><option>Apartment</option><option>Villa</option></select>
+        <a href="properties.html" class="px-6 py-3 rounded-xl bg-zinc-900 text-white text-sm font-medium">Search</a>
+      </div>
+    </div>
+    <div class="h-[380px] rounded-3xl overflow-hidden bg-zinc-100"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900" class="h-full w-full object-cover" alt="hero"></div>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h2 class="text-2xl font-bold">Discover the Property Types</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mt-6">
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">H</div><div class="mt-2 text-xs font-medium">HOUSE</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">A</div><div class="mt-2 text-xs font-medium">APARTMENT</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">V</div><div class="mt-2 text-xs font-medium">VILLA</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">B</div><div class="mt-2 text-xs font-medium">BUNGALOW</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">T</div><div class="mt-2 text-xs font-medium">TOWNHOUSE</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">L</div><div class="mt-2 text-xs font-medium">LOFT</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">O</div><div class="mt-2 text-xs font-medium">OFFICE</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-200 grid place-items-center text-xs">+</div><div class="mt-2 text-xs font-medium">MORE</div></a>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="flex items-center justify-between"><h2 class="text-2xl font-bold">Featured Properties</h2><a href="properties.html" class="text-sm text-violet-600">View More →</a></div>
+  <div id="featuredGrid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6"></div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h2 class="text-2xl font-bold">We Are Available in Many Cities</h2>
+  <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6" id="citiesGrid"></div>
+</section>
+
+<section class="bg-zinc-900 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <h3 class="text-2xl font-bold">Let's Find Your Dream House with Dreamwell!</h3>
+    <a href="properties.html" class="px-6 py-3 rounded-full bg-white text-zinc-900 font-medium">View More</a>
+  </div>
+</section>
+
+<footer class="bg-zinc-900 text-zinc-400">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid md:grid-cols-4 gap-8 text-sm">
+    <div><div class="text-white font-semibold mb-3">Dreamwell</div><p id="footerAddr" class="leading-6 text-zinc-500">Realtor Office Building 5F, 123 Anywhere St.</p></div>
+    <div><div class="text-white font-medium mb-3">Quick Links</div><ul class="space-y-2"><li>About Us</li><li>Privacy Policy</li><li>Terms</li></ul></div>
+    <div><div class="text-white font-medium mb-3">Discover</div><ul class="space-y-2"><li>Asia</li><li>Europe</li><li>America</li></ul></div>
+    <div><div class="text-white font-medium mb-3">Subscribe</div><div class="flex gap-2"><input placeholder="Email" class="flex-1 rounded-full px-4 py-2 bg-zinc-800 border border-zinc-700"><button class="px-5 py-2 rounded-full bg-white text-zinc-900 font-medium">Subscribe</button></div></div>
+  </div>
+  <div class="border-t border-zinc-800 text-center py-6 text-xs">© 2024 Dreamwell. All rights reserved.</div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const s = getSettings();
+  document.getElementById('heroTitle').textContent = s.siteTagline;
+  document.getElementById('footerAddr').textContent = s.contactAddress + ' — ' + s.contactPhone;
+  const feat = getProperties().filter(p=>p.featured).slice(0,4);
+  document.getElementById('featuredGrid').innerHTML = feat.map(cardHTML).join('');
+  const cities = [{name:'Singapore',count:87,img:'https://images.unsplash.com/photo-1525625293386-3f8f993a477f?w=400'},{name:'Bali',count:130,img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400'},{name:'London',count:56,img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400'},{name:'New York',count:62,img:'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400'},{name:'Los Angeles',count:125,img:'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=400'},{name:'Jakarta',count:147,img:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400'}];
+  document.getElementById('citiesGrid').innerHTML = cities.map(c=>`<a href="properties.html" class="relative h-36 rounded-2xl overflow-hidden group"><img src="${c.img}" class="h-full w-full object-cover group-hover:scale-105 transition"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-3 left-3 text-white"><div class="font-semibold text-sm">${c.name}</div><div class="text-xs opacity-80">${c.count} properties</div></div></a>`).join('');
+});
+function cardHTML(p){
+  return `<a href="property.html?id=${p.id}" class="group bg-white rounded-2xl overflow-hidden border border-zinc-100 hover:shadow-xl transition"><div class="relative h-52 overflow-hidden"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status}</span><span class="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full bg-white/90 backdrop-blur font-medium">${p.type}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1">${p.title}</h3><p class="text-xs text-zinc-500 mt-1 line-clamp-1">${p.location}</p><div class="flex items-center gap-2 mt-3 text-xs text-zinc-600"><span>${p.beds} beds</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.baths} baths</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.sqft} sqft</span></div><div class="mt-4 flex items-center justify-between"><span class="font-bold">${p.priceLabel}</span><span class="text-xs text-violet-600 font-medium">View →</span></div></div></a>`;
+}
+</script>
+</body>
+</html>

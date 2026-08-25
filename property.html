@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Property Details — Dreamwell</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-lg bg-zinc-900 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">Dreamwell</span></a>
+    <nav class="hidden md:flex gap-6 text-sm"><a href="index.html" class="text-zinc-600">Home</a><a href="properties.html" class="font-medium">Listing</a><a href="admin/index.html" class="text-violet-600 font-medium">Admin</a></nav>
+  </div>
+</header>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <a href="properties.html" class="text-sm text-zinc-500">← Back to listings</a>
+  <div id="content" class="mt-6"></div>
+</div>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const id=new URLSearchParams(location.search).get('id');
+  const p=getProperties().find(x=>x.id===id);
+  const el=document.getElementById('content');
+  if(!p){ el.innerHTML=`<div class="text-center py-16">Not found — <a href="properties.html" class="text-violet-600">Back</a></div>`; return; }
+  el.innerHTML=`
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <div class="h-[420px] rounded-3xl overflow-hidden bg-zinc-100"><img src="${p.image}" class="h-full w-full object-cover"></div>
+        <h1 class="text-2xl font-bold mt-6">${p.title}</h1>
+        <p class="text-zinc-500 text-sm mt-1">${p.location} • ${p.type} • ${p.status}</p>
+        <p class="mt-4 text-zinc-700 leading-7">${p.description}</p>
+        <div class="flex flex-wrap gap-3 mt-6 text-sm">
+          <span class="px-4 py-2 rounded-full bg-zinc-900 text-white">${p.beds} Beds</span>
+          <span class="px-4 py-2 rounded-full bg-white border">${p.baths} Baths</span>
+          <span class="px-4 py-2 rounded-full bg-white border">${p.sqft} sqft</span>
+          <span class="px-4 py-2 rounded-full bg-white border">${p.garages} garage</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border p-6 h-fit sticky top-20">
+        <div class="text-2xl font-bold">${p.priceLabel}</div>
+        <div class="mt-4 space-y-3 text-sm">
+          <div class="flex justify-between"><span class="text-zinc-500">Type</span><span class="font-medium">${p.type}</span></div>
+          <div class="flex justify-between"><span class="text-zinc-500">Status</span><span class="font-medium">${p.status}</span></div>
+          <div class="flex justify-between"><span class="text-zinc-500">City</span><span class="font-medium">${p.city}</span></div>
+        </div>
+        <button class="w-full mt-6 py-3 rounded-xl bg-zinc-900 text-white font-medium">Contact Agent</button>
+        <a href="admin/index.html" class="block text-center mt-3 text-xs text-violet-600">Edit in Admin →</a>
+      </div>
+    </div>`;
+});
+</script>
+</body>
+</html>
