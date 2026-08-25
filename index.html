@@ -15,6 +15,9 @@ body{font-family:'Inter',sans-serif;background:#F5F7FA;color:#636363}
 h1,h2,h3,h4{font-family:'Golos Text',sans-serif;color:#152046}
 .hero-bg{background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat}
 .swiper-pagination-bullet-active{background:#19CF79!important}
+.heroSlider .swiper-pagination-bullet{background:rgba(255,255,255,.55);opacity:1}
+.heroSlider .swiper-pagination-bullet-active{background:#19CF79!important}
+.heroSlider .swiper-slide img{will-change:transform}
 .adv-wrap{max-height:0;opacity:0;overflow:hidden;transition:all .35s ease}
 .adv-wrap.open{max-height:600px;opacity:1;margin-top:16px;padding-top:16px;border-top:1px solid #F0F0F0}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
@@ -62,39 +65,96 @@ h1,h2,h3,h4{font-family:'Golos Text',sans-serif;color:#152046}
   </div>
 </header>
 
-<!-- Hero -->
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-6" data-aos="fade-up">
-  <div id="heroWrap" class="rounded-[25px] min-h-[520px] lg:min-h-[640px] flex flex-col items-center justify-center text-center px-6 py-16 relative overflow-hidden">
-    <div id="heroParallax" class="absolute inset-0 rounded-[25px]" style="background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat"></div>
-    <div class="absolute inset-0 bg-black/15 rounded-[25px]"></div>
-    <!-- Floating For Sale badge with pulse -->
-    <div class="absolute top-5 right-5 lg:top-7 lg:right-7 bg-white rounded-full pl-2 pr-4 py-2 shadow-[0_8px_24px_rgba(0,0,0,.14)] hidden md:flex items-center gap-2.5 z-20 float-anim pulse-badge">
-      <span class="h-8 w-8 rounded-full bg-accent text-white grid place-items-center text-xs"><i class="fa-solid fa-tag"></i></span>
-      <span class="text-[13px] font-bold text-heading tracking-wide">FOR SALE</span>
-      <span class="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span>
-      <span class="text-xs font-medium text-body">1,240+ listings</span>
+<!-- Hero — FULL WIDTH slideshow -->
+<section class="relative w-full" data-aos="fade-up">
+  <div class="swiper heroSlider w-full h-[480px] lg:h-[520px] relative overflow-hidden">
+    <div class="swiper-wrapper">
+      <!-- Slide 1: Beach View Villa -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80&auto=format&fit=crop" alt="Beach View Villa — Denpasar Bali" loading="lazy" decoding="async" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-[0.14em] font-semibold">FEATURED • BALI • FOR RENT</span>
+          <h2 class="mt-4 text-[30px] lg:text-[48px] font-bold leading-[1.1] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">Beach View Villa</h2>
+          <p class="mt-3 text-white/90 text-[15px] lg:text-[17px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> Denpasar, Bali, Indonesia <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">$1,900 /month</span></p>
+          <a href="property.html?id=1" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 2: Shangri la Apartment -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80&auto=format&fit=crop" alt="Shangri la Apartment — Singapore" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-[0.14em] font-semibold">FEATURED • SINGAPORE • FOR RENT</span>
+          <h2 class="mt-4 text-[30px] lg:text-[48px] font-bold leading-[1.1] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">Shangri la Apartment</h2>
+          <p class="mt-3 text-white/90 text-[15px] lg:text-[17px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> Bukit Merah, Singapore <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">$1,500 /month</span></p>
+          <a href="property.html?id=2" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 3: Ranch House -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&q=80&auto=format&fit=crop" alt="Single Family Ranch House — New York" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-[0.14em] font-semibold">FEATURED • NEW YORK • FOR SALE</span>
+          <h2 class="mt-4 text-[30px] lg:text-[48px] font-bold leading-[1.1] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">Single Family Ranch House</h2>
+          <p class="mt-3 text-white/90 text-[15px] lg:text-[17px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> Brooklyn, New York, USA <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">$985,000</span></p>
+          <a href="property.html?id=3" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 4: Northern Apartment -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80&auto=format&fit=crop" alt="Northern Apartment — Los Angeles" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-[0.14em] font-semibold">FEATURED • LOS ANGELES • FOR SALE</span>
+          <h2 class="mt-4 text-[30px] lg:text-[48px] font-bold leading-[1.1] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">Northern Apartment</h2>
+          <p class="mt-3 text-white/90 text-[15px] lg:text-[17px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> Burbank, Los Angeles, USA <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">$653,000</span></p>
+          <a href="property.html?id=4" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 5: Cowboy Country House -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80&auto=format&fit=crop" alt="The Cowboy Country House — Florida" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-[0.14em] font-semibold">NEW LISTING • FLORIDA • FOR RENT</span>
+          <h2 class="mt-4 text-[30px] lg:text-[48px] font-bold leading-[1.1] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">The Cowboy Country House</h2>
+          <p class="mt-3 text-white/90 text-[15px] lg:text-[17px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> Florida, USA <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">$1,000 /month</span> <span class="text-white/60">• 3 beds • 1,890 sqft</span></p>
+          <a href="property.html?id=5" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 6: Blue Seagull Beach House -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f63baa68a8?w=1600&q=80&auto=format&fit=crop" alt="Blue Seagull Beach House — Queensland" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-[0.14em] font-semibold">BEACHFRONT • QUEENSLAND • FOR RENT</span>
+          <h2 class="mt-4 text-[30px] lg:text-[48px] font-bold leading-[1.1] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">Blue Seagull Beach House</h2>
+          <p class="mt-3 text-white/90 text-[15px] lg:text-[17px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> Queensland, Australia <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">$800 /month</span></p>
+          <a href="property.html?id=6" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
     </div>
-    <!-- Floating key icon -->
-    <div id="floatKey" class="absolute bottom-8 left-6 lg:bottom-10 lg:left-8 hidden md:flex h-[66px] w-[66px] rounded-[18px] bg-white/95 backdrop-blur shadow-[0_12px_32px_rgba(0,0,0,.16)] items-center justify-center text-accent drift z-20" style="animation-delay:.35s">
-      <i class="fa-solid fa-key text-[20px]"></i>
-    </div>
-    <!-- Floating house outline - subtle parallax -->
-    <div id="floatHouse" class="absolute top-[18%] left-[6%] hidden xl:grid place-items-center h-14 w-14 rounded-2xl bg-white/85 backdrop-blur shadow-lg text-accent/60 drift z-20" style="animation-delay:.85s">
-      <i class="fa-regular fa-house text-lg"></i>
-    </div>
-    <div class="relative z-10 max-w-3xl" data-aos="fade-up" data-aos-delay="120">
-      <h1 class="text-[42px] lg:text-[64px] font-bold leading-[1.1] text-white drop-shadow">We provide <span class="text-accent">the best house</span> to be your home</h1>
-      <p class="mt-6 text-white/90 text-[18px] lg:text-[24px]">We provide the best house to be your home</p>
-    </div>
+    <!-- Navigation & pagination -->
+    <button id="heroPrev" aria-label="Previous slide" class="hidden md:grid absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 backdrop-blur border border-white/40 shadow-lg place-items-center text-heading hover:bg-accent hover:text-white hover:border-accent transition"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+    <button id="heroNext" aria-label="Next slide" class="hidden md:grid absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 backdrop-blur border border-white/40 shadow-lg place-items-center text-heading hover:bg-accent hover:text-white hover:border-accent transition"><i class="fa-solid fa-chevron-right text-sm"></i></button>
+    <div class="swiper-pagination !bottom-[84px] lg:!bottom-[72px]"></div>
   </div>
-  <!-- Filter Tabs -->
-  <div class="max-w-5xl mx-auto -mt-14 relative z-20 px-2" data-aos="fade-up" data-aos-delay="200">
+  <!-- Filter bar — overlayed at bottom of hero, centered white card -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[46%] w-[94%] max-w-5xl z-20 px-2" data-aos="fade-up" data-aos-delay="220">
     <ul id="heroTabs" class="flex items-center justify-center gap-2 mb-3">
-      <li data-tab="buy" class="active px-6 py-2.5 rounded-full bg-accent text-white text-sm font-semibold cursor-pointer shadow">Buy</li>
+      <li data-tab="buy" class="px-6 py-2.5 rounded-full bg-accent text-white text-sm font-semibold cursor-pointer shadow">Buy</li>
       <li data-tab="rent" class="px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border hover:bg-accent hover:text-white transition">Rent</li>
       <li data-tab="coliving" class="px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border hover:bg-accent hover:text-white transition">Co-Living</li>
     </ul>
-    <div class="bg-white rounded-[20px] shadow-[0_20px_60px_rgba(21,32,70,.12)] p-4 lg:p-6">
+    <div class="bg-white rounded-[20px] shadow-[0_20px_60px_rgba(21,32,70,.14)] p-4 lg:p-6 border border-zinc-100">
       <form id="heroForm" class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end">
         <div class="flex-1">
           <label class="text-xs font-medium text-heading">Type</label>
@@ -129,8 +189,8 @@ h1,h2,h3,h4{font-family:'Golos Text',sans-serif;color:#152046}
   </div>
 </section>
 
-<!-- Property Types -->
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
+<!-- Property Types — extra top padding to clear overlapping hero filter bar -->
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-20 lg:pt-24" data-aos="fade-up">
   <h2 class="text-center text-[36px] lg:text-[48px] font-semibold leading-tight" data-aos="fade-up" data-aos-delay="60">Discover the Property Types</h2>
   <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-10">
     <a href="properties.html?type=House" class="group bg-white rounded-[15px] py-8 px-4 text-center shadow-[0_4px_20px_rgba(21,32,70,.04)] prop-card" data-aos="fade-up" data-aos-delay="0">
@@ -350,29 +410,20 @@ document.querySelectorAll('.faq-btn').forEach(btn=>btn.addEventListener('click',
 }));
 // AOS
 AOS.init({duration:700,once:true,offset:80,easing:'ease-out-cubic',disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches});
-// subtle parallax for hero + floating elements (lightweight, rAF throttled)
+// heroSlider — full-width 6-slide advertisement slideshow (lightweight, lazy, autoplay)
 (function(){
-  const parallax=document.getElementById('heroParallax');
-  const floatKey=document.getElementById('floatKey');
-  const floatHouse=document.getElementById('floatHouse');
-  const heroWrap=document.getElementById('heroWrap');
-  if(!parallax||!heroWrap) return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let ticking=false;
-  window.addEventListener('scroll',()=>{
-    if(ticking) return;
-    ticking=true;
-    requestAnimationFrame(()=>{
-      const rect=heroWrap.getBoundingClientRect();
-      if(rect.bottom>0 && rect.top < window.innerHeight){
-        const y=window.scrollY*0.08;
-        parallax.style.transform='translate3d(0,'+y+'px,0) scale(1.05)';
-        if(floatKey) floatKey.style.transform='translate3d(0,'+(-window.scrollY*0.04)+'px,0)';
-        if(floatHouse) floatHouse.style.transform='translate3d(0,'+(-window.scrollY*0.06)+'px,0)';
-      }
-      ticking=false;
-    });
-  },{passive:true});
+  const el=document.querySelector('.heroSlider');
+  if(!el) return;
+  new Swiper('.heroSlider',{
+    slidesPerView:1,
+    loop:true,
+    speed:700,
+    autoplay:{delay:3800,disableOnInteraction:false,pauseOnMouseEnter:true},
+    pagination:{el:'.heroSlider .swiper-pagination',clickable:true},
+    navigation:{nextEl:'#heroNext',prevEl:'#heroPrev'},
+    preloadImages:false,
+    lazy:true
+  });
 })();
 
 function cardHTML(p){

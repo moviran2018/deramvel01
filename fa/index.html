@@ -23,6 +23,8 @@ body{font-family:'Vazirmatn',sans-serif;background:#F5F7FA;color:#636363}h1,h2,h
 #heroParallax{will-change:transform;transform:translate3d(0,0,0) scale(1.05)}
 .cities-swiper .swiper-slide{height:auto}
 @media (prefers-reduced-motion:reduce){.float-anim,.drift,.pulse-badge{animation:none!important}#heroParallax{transform:none!important}}
+.heroSlider .swiper-pagination-bullet{background:rgba(255,255,255,.55);opacity:1}
+.heroSlider .swiper-pagination-bullet-active{background:#19CF79!important}
 .swiper-pagination-bullet-active{background:#19CF79!important}
 </style>
 </head>
@@ -44,36 +46,95 @@ body{font-family:'Vazirmatn',sans-serif;background:#F5F7FA;color:#636363}h1,h2,h
   </div>
 </header>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-6" data-aos="fade-up">
-  <div id="heroWrap" class="rounded-[25px] min-h-[520px] lg:min-h-[620px] flex flex-col items-center justify-center text-center px-6 py-16 relative overflow-hidden">
-    <div id="heroParallax" class="absolute inset-0 rounded-[25px]" style="background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat"></div>
-    <div class="absolute inset-0 bg-black/15 rounded-[25px]"></div>
-    <!-- Floating For Sale badge -->
-    <div class="absolute top-5 left-5 lg:top-7 lg:left-7 bg-white rounded-full pl-4 pr-2 py-2 shadow-[0_8px_24px_rgba(0,0,0,.14)] hidden md:flex items-center gap-2.5 z-20 float-anim pulse-badge">
-      <span class="text-xs font-medium text-body">۱۲۰۰+ آگهی</span>
-      <span class="h-1.5 w-1.5 rounded-full bg-accent animate-pulse"></span>
-      <span class="text-[13px] font-bold text-heading">فروش ویژه</span>
-      <span class="h-8 w-8 rounded-full bg-accent text-white grid place-items-center text-xs"><i class="fa-solid fa-tag"></i></span>
+<!-- Hero — FULL WIDTH slideshow (RTL) -->
+<section class="relative w-full" data-aos="fade-up">
+  <div class="swiper heroSlider w-full h-[480px] lg:h-[520px] relative overflow-hidden">
+    <div class="swiper-wrapper">
+      <!-- Slide 1: ویلای ساحلی -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80&auto=format&fit=crop" alt="ویلای ساحلی بالی" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-wide font-semibold">ویژه • بالی • اجاره</span>
+          <h2 class="mt-4 text-[30px] lg:text-[46px] font-bold leading-[1.15] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">ویلای ساحلی بالی</h2>
+          <p class="mt-3 text-white/90 text-[15px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> دنپاسار، بالی، اندونزی <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">۱,۹۰۰$ /ماه</span></p>
+          <a href="../property.html?id=1" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">مشاهده جزئیات <i class="fa-solid fa-arrow-left text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 2: آپارتمان شانگری‌لا -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80&auto=format&fit=crop" alt="آپارتمان شانگری‌لا سنگاپور" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-wide font-semibold">ویژه • سنگاپور • اجاره</span>
+          <h2 class="mt-4 text-[30px] lg:text-[46px] font-bold leading-[1.15] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">آپارتمان شانگری‌لا</h2>
+          <p class="mt-3 text-white/90 text-[15px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> بوکیت مرا، سنگاپور <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">۱,۵۰۰$ /ماه</span></p>
+          <a href="../property.html?id=2" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">مشاهده جزئیات <i class="fa-solid fa-arrow-left text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 3: خانه رنچ بروکلین -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&q=80&auto=format&fit=crop" alt="خانه رنچ نیویورک" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-wide font-semibold">ویژه • نیویورک • فروش</span>
+          <h2 class="mt-4 text-[30px] lg:text-[46px] font-bold leading-[1.15] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">خانه رنچ خانوادگی</h2>
+          <p class="mt-3 text-white/90 text-[15px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> بروکلین، نیویورک <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">۹۸۵,۰۰۰$</span></p>
+          <a href="../property.html?id=3" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">مشاهده جزئیات <i class="fa-solid fa-arrow-left text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 4: آپارتمان شمالی -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80&auto=format&fit=crop" alt="آپارتمان شمالی لس‌آنجلس" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-wide font-semibold">ویژه • لس‌آنجلس • فروش</span>
+          <h2 class="mt-4 text-[30px] lg:text-[46px] font-bold leading-[1.15] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">آپارتمان شمالی</h2>
+          <p class="mt-3 text-white/90 text-[15px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> بربنک، لس‌آنجلس <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">۶۵۳,۰۰۰$</span></p>
+          <a href="../property.html?id=4" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">مشاهده جزئیات <i class="fa-solid fa-arrow-left text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 5: خانه کابوی -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80&auto=format&fit=crop" alt="خانه کابوی فلوریدا" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-wide font-semibold">جدید • فلوریدا • اجاره</span>
+          <h2 class="mt-4 text-[30px] lg:text-[46px] font-bold leading-[1.15] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">خانه کابوی فلوریدا</h2>
+          <p class="mt-3 text-white/90 text-[15px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> فلوریدا، آمریکا <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">۱,۰۰۰$ /ماه</span> <span class="text-white/60">• ۳ خواب • ۱۸۹۰ فوت</span></p>
+          <a href="../property.html?id=5" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">مشاهده جزئیات <i class="fa-solid fa-arrow-left text-xs"></i></a>
+        </div>
+      </div>
+      <!-- Slide 6: خانه ساحلی مرغان دریایی -->
+      <div class="swiper-slide relative h-full w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f63baa68a8?w=1600&q=80&auto=format&fit=crop" alt="خانه ساحلی کوئینزلند" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 pb-20 lg:pb-16 max-w-4xl mx-auto">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] tracking-wide font-semibold">لب ساحل • کوئینزلند • اجاره</span>
+          <h2 class="mt-4 text-[30px] lg:text-[46px] font-bold leading-[1.15] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.4)]">خانه ساحلی مرغان دریایی</h2>
+          <p class="mt-3 text-white/90 text-[15px] flex flex-wrap items-center justify-center gap-2"><i class="fa-solid fa-location-dot text-accent"></i> کوئینزلند، استرالیا <span class="hidden sm:inline text-white/40">•</span> <span class="font-bold text-white">۸۰۰$ /ماه</span></p>
+          <a href="../property.html?id=6" class="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-accent text-white text-[14px] font-semibold hover:bg-white hover:text-heading transition shadow-[0_8px_24px_rgba(25,207,121,.4)]">مشاهده جزئیات <i class="fa-solid fa-arrow-left text-xs"></i></a>
+        </div>
+      </div>
     </div>
-    <!-- Floating key -->
-    <div id="floatKey" class="absolute bottom-8 right-6 lg:bottom-10 lg:right-8 hidden md:flex h-[66px] w-[66px] rounded-[18px] bg-white/95 backdrop-blur shadow-[0_12px_32px_rgba(0,0,0,.16)] items-center justify-center text-accent drift z-20" style="animation-delay:.35s">
-      <i class="fa-solid fa-key text-[20px]"></i>
-    </div>
-    <div id="floatHouse" class="absolute top-[18%] right-[6%] hidden xl:grid place-items-center h-14 w-14 rounded-2xl bg-white/85 backdrop-blur shadow-lg text-accent/60 drift z-20" style="animation-delay:.85s">
-      <i class="fa-regular fa-house text-lg"></i>
-    </div>
-    <div class="relative z-10 max-w-3xl" data-aos="fade-up" data-aos-delay="120">
-      <h1 class="text-[38px] lg:text-[54px] font-bold leading-[1.15] text-white">بهترین خانه را برای زندگی‌ات <span class="text-accent">پیدا کن</span></h1>
-      <p class="mt-6 text-white/90 text-lg">با مشاوران حرفه‌ای، هیچ خانه‌ای دور از دسترس نیست</p>
-    </div>
+    <button id="heroPrev" aria-label="قبلی" class="hidden md:grid absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 backdrop-blur border border-white/40 shadow-lg place-items-center text-heading hover:bg-accent hover:text-white hover:border-accent transition"><i class="fa-solid fa-chevron-right text-sm"></i></button>
+    <button id="heroNext" aria-label="بعدی" class="hidden md:grid absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 backdrop-blur border border-white/40 shadow-lg place-items-center text-heading hover:bg-accent hover:text-white hover:border-accent transition"><i class="fa-solid fa-chevron-left text-sm"></i></button>
+    <div class="swiper-pagination !bottom-[84px] lg:!bottom-[72px]"></div>
   </div>
-  <div class="max-w-5xl mx-auto -mt-14 relative z-20 px-2" data-aos="fade-up" data-aos-delay="200">
+  <!-- Filter bar — overlayed at bottom (RTL: still centered) -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[46%] w-[94%] max-w-5xl z-20 px-2" data-aos="fade-up" data-aos-delay="220">
     <ul id="heroTabs" class="flex items-center justify-center gap-2 mb-3">
       <li data-tab="buy" class="px-6 py-2.5 rounded-full bg-accent text-white text-sm font-semibold cursor-pointer shadow">خرید</li>
       <li data-tab="rent" class="px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border">اجاره</li>
       <li data-tab="coliving" class="px-6 py-2.5 rounded-full bg-white text-heading text-sm font-medium cursor-pointer shadow border">هم‌خونه</li>
     </ul>
-    <div class="bg-white rounded-[20px] shadow-[0_20px_60px_rgba(21,32,70,.12)] p-4 lg:p-6">
+    <div class="bg-white rounded-[20px] shadow-[0_20px_60px_rgba(21,32,70,.14)] p-4 lg:p-6 border border-zinc-100">
       <form id="heroForm" class="flex flex-col lg:flex-row gap-4 items-stretch">
         <div class="flex-1"><label class="text-xs font-medium text-heading">نوع</label><select id="heroType" class="mt-1 w-full rounded-xl border border-zinc-200 px-4 py-3 text-sm font-semibold text-heading bg-white"><option>خانه</option><option>آپارتمان</option><option>ویلا</option></select></div>
         <div class="flex-1"><label class="text-xs font-medium text-heading">موقعیت</label><select id="heroLoc" class="mt-1 w-full rounded-xl border border-zinc-200 px-4 py-3 text-sm font-semibold text-heading bg-white"><option value="">همه شهرها</option><option>تهران</option><option>دبی</option><option>استانبول</option><option>Bali</option></select></div>
@@ -91,7 +152,7 @@ body{font-family:'Vazirmatn',sans-serif;background:#F5F7FA;color:#636363}h1,h2,h
   </div>
 </section>
 
-<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-16" data-aos="fade-up">
+<section class="max-w-[1620px] mx-auto px-4 lg:px-6 pt-20 lg:pt-24" data-aos="fade-up">
   <h2 class="text-center text-[32px] lg:text-[44px] font-bold" data-aos="fade-up" data-aos-delay="60">انواع ملک را کشف کنید</h2>
   <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-10">
     <a href="properties.html" class="bg-white rounded-[15px] py-8 px-4 text-center shadow prop-card" data-aos="fade-up" data-aos-delay="0"><span class="icon-float h-14 w-14 mx-auto grid place-items-center rounded-full bg-[#F5F7FA] text-accent"><i class="fa-solid fa-house"></i></span><div class="mt-3 text-xs font-medium text-heading">خانه</div></a>
@@ -178,27 +239,18 @@ document.querySelectorAll('#heroTabs li').forEach(li=>li.addEventListener('click
 document.getElementById('heroForm').addEventListener('submit',e=>{e.preventDefault(); const city=document.getElementById('heroLoc').value; location.href='properties.html'+(city?'?city='+city:'');});
 AOS.init({duration:700,once:true,offset:80,easing:'ease-out-cubic',disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches});
 (function(){
-  const parallax=document.getElementById('heroParallax');
-  const floatKey=document.getElementById('floatKey');
-  const floatHouse=document.getElementById('floatHouse');
-  const heroWrap=document.getElementById('heroWrap');
-  if(!parallax||!heroWrap) return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let ticking=false;
-  window.addEventListener('scroll',()=>{
-    if(ticking) return;
-    ticking=true;
-    requestAnimationFrame(()=>{
-      const rect=heroWrap.getBoundingClientRect();
-      if(rect.bottom>0 && rect.top < window.innerHeight){
-        const y=window.scrollY*0.08;
-        parallax.style.transform='translate3d(0,'+y+'px,0) scale(1.05)';
-        if(floatKey) floatKey.style.transform='translate3d(0,'+(-window.scrollY*0.04)+'px,0)';
-        if(floatHouse) floatHouse.style.transform='translate3d(0,'+(-window.scrollY*0.06)+'px,0)';
-      }
-      ticking=false;
-    });
-  },{passive:true});
+  const el=document.querySelector('.heroSlider');
+  if(!el) return;
+  new Swiper('.heroSlider',{
+    slidesPerView:1,
+    loop:true,
+    speed:700,
+    autoplay:{delay:3800,disableOnInteraction:false,pauseOnMouseEnter:true},
+    pagination:{el:'.heroSlider .swiper-pagination',clickable:true},
+    navigation:{nextEl:'#heroNext',prevEl:'#heroPrev'},
+    preloadImages:false,
+    lazy:true
+  });
 })();
 
 function cardHTML(p){
