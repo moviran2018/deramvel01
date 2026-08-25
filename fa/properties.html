@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Properties â€” Dreamwell</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-lg bg-zinc-900 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">Dreamwell</span></a>
+    <nav class="hidden md:flex gap-6 text-sm"><a href="index.html" class="text-zinc-600">Home</a><a href="properties.html" class="font-medium">Listing</a><a href="admin/index.html" class="text-violet-600 font-medium">Admin</a></nav>
+  </div>
+</header>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex items-center gap-2 text-sm text-zinc-500 mb-6"><a href="index.html">Home</a><span>/</span><span class="text-zinc-900 font-medium">Grid With Left Filter</span></div>
+  <div class="flex flex-col lg:flex-row gap-6">
+    <aside class="lg:w-80 shrink-0">
+      <div class="bg-white rounded-2xl border border-zinc-100 p-6 space-y-5 sticky top-20">
+        <div class="flex items-center justify-between"><h3 class="font-semibold">Find your home</h3><button onclick="resetFilters()" class="text-xs text-zinc-500 hover:text-zinc-900">Reset</button></div>
+        <div><label class="text-xs font-medium">Location</label><select id="fLoc" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any Location</option></select></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="text-xs font-medium">Type</label><select id="fType" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any Type</option><option>House</option><option>Apartment</option><option>Villa</option><option>Townhouse</option><option>Office</option></select></div>
+          <div><label class="text-xs font-medium">Status</label><select id="fStatus" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any Status</option><option>For Rent</option><option>For Sale</option></select></div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="text-xs font-medium">Bedrooms</label><select id="fBeds" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any</option><option>1</option><option>2</option><option>3</option></select></div>
+          <div><label class="text-xs font-medium">Bathrooms</label><select id="fBaths" class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"><option value="">Any</option><option>1</option><option>2</option><option>3</option></select></div>
+        </div>
+        <div><label class="text-xs font-medium">Search</label><input id="fSearch" placeholder="Title or city..." class="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2.5 text-sm"></div>
+        <div><label class="text-xs font-medium">Max Price: <span id="priceLabel">1M+</span></label><input id="fPrice" type="range" min="0" max="1000000" step="5000" value="1000000" class="w-full mt-2"></div>
+      </div>
+    </aside>
+    <div class="flex-1">
+      <div class="flex items-center justify-between mb-4">
+        <p id="count" class="text-sm text-zinc-600">Showing 0 results</p>
+        <select id="sort" class="rounded-xl border border-zinc-200 px-3 py-2 text-sm"><option value="default">Sort By Default</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select>
+      </div>
+      <div id="grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js"></script>
+<script>
+const els = {loc:document.getElementById('fLoc'),type:document.getElementById('fType'),status:document.getElementById('fStatus'),beds:document.getElementById('fBeds'),baths:document.getElementById('fBaths'),search:document.getElementById('fSearch'),price:document.getElementById('fPrice'),priceLabel:document.getElementById('priceLabel'),sort:document.getElementById('sort'),grid:document.getElementById('grid'),count:document.getElementById('count')};
+function init(){
+  const cities=[...new Set(getProperties().map(p=>p.city))];
+  cities.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;els.loc.appendChild(o)});
+  ['input','change'].forEach(e=>{els.loc.addEventListener(e,render);els.type.addEventListener(e,render);els.status.addEventListener(e,render);els.beds.addEventListener(e,render);els.baths.addEventListener(e,render);els.search.addEventListener(e,render);els.price.addEventListener('input',()=>{els.priceLabel.textContent=els.price.value==1000000?'1M+':'$'+Number(els.price.value).toLocaleString();render()});els.sort.addEventListener(e,render)});
+  render();
+}
+function getFiltered(){
+  let list=getProperties().filter(p=>{
+    if(els.loc.value && p.city!==els.loc.value) return false;
+    if(els.type.value && p.type!==els.type.value) return false;
+    if(els.status.value && p.status!==els.status.value) return false;
+    if(els.beds.value && String(p.beds)!==els.beds.value) return false;
+    if(els.baths.value && String(p.baths)!==els.baths.value) return false;
+    if(p.price>Number(els.price.value)) return false;
+    if(els.search.value && !(`${p.title} ${p.city}`.toLowerCase().includes(els.search.value.toLowerCase()))) return false;
+    return true;
+  });
+  if(els.sort.value==='low') list=[...list].sort((a,b)=>a.price-b.price);
+  if(els.sort.value==='high') list=[...list].sort((a,b)=>b.price-a.price);
+  return list;
+}
+function render(){
+  const list=getFiltered();
+  els.count.textContent=`Showing ${list.length} of ${getProperties().length} results`;
+  els.grid.innerHTML=list.length?list.map(p=>`<a href="property.html?id=${p.id}" class="group bg-white rounded-2xl overflow-hidden border border-zinc-100 hover:shadow-xl transition"><div class="relative h-52 overflow-hidden"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status}</span><span class="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full bg-white/90 backdrop-blur font-medium">${p.type}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1">${p.title}</h3><p class="text-xs text-zinc-500 mt-1 line-clamp-1">${p.location}</p><div class="flex items-center gap-2 mt-3 text-xs text-zinc-600"><span>${p.beds} beds</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.baths} baths</span><span class="h-1 w-1 rounded-full bg-zinc-300"></span><span>${p.sqft} sqft</span></div><div class="mt-4 flex items-center justify-between"><span class="font-bold">${p.priceLabel}</span><span class="text-xs text-violet-600 font-medium">View â†’</span></div></div></a>`).join(''):`<div class="col-span-full text-center py-16 text-zinc-500">No properties found</div>`;
+}
+function resetFilters(){els.loc.value='';els.type.value='';els.status.value='';els.beds.value='';els.baths.value='';els.search.value='';els.price.value=1000000;els.priceLabel.textContent='1M+';els.sort.value='default';render();}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
+

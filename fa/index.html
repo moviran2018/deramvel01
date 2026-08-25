@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دریم‌ول — املاک</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+<style>body{font-family:Vazirmatn,Inter,sans-serif}</style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-lg bg-zinc-900 text-white grid place-items-center font-bold text-sm">D</div><span class="font-semibold">دریم‌ول</span></a>
+    <nav class="hidden md:flex gap-6 text-sm"><a href="index.html" class="font-medium">خانه</a><a href="properties.html" class="text-zinc-600 hover:text-zinc-900">املاک</a><a href="../admin/index.html" class="text-violet-600 font-medium">پنل</a><a href="../index.html" class="text-zinc-500">EN</a></nav>
+    <a href="../admin/index.html" class="hidden md:inline-flex px-4 py-2 rounded-full bg-zinc-900 text-white text-sm">افزودن ملک</a>
+  </div>
+</header>
+<section class="bg-white border-b">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid lg:grid-cols-2 gap-10 items-center">
+    <div>
+      <h1 id="heroTitle" class="text-4xl lg:text-5xl font-bold leading-tight">بهترین خانه را برای تو فراهم می‌کنیم</h1>
+      <p class="mt-4 text-zinc-600">با مشاوران حرفه‌ای، هیچ خانه‌ای دور از دسترس نیست.</p>
+      <div class="mt-6 bg-white border border-zinc-200 rounded-2xl p-4 shadow-sm flex flex-wrap gap-3">
+        <select class="flex-1 min-w-[140px] rounded-xl border border-zinc-200 px-3 py-3 text-sm"><option>هر موقعیت</option><option>تهران</option><option>دبی</option><option>استانبول</option></select>
+        <select class="flex-1 min-w-[140px] rounded-xl border border-zinc-200 px-3 py-3 text-sm"><option>هر نوع</option><option>خانه</option><option>آپارتمان</option><option>ویلا</option></select>
+        <a href="properties.html" class="px-6 py-3 rounded-xl bg-zinc-900 text-white text-sm font-medium">جستجو</a>
+      </div>
+    </div>
+    <div class="relative h-[380px] rounded-3xl overflow-hidden bg-zinc-100">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900" class="h-full w-full object-cover" alt="hero">
+      <div class="absolute top-6 right-6 bg-white rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3" style="animation:float 5s ease-in-out infinite"><div class="h-8 w-8 rounded-full bg-emerald-500 grid place-items-center text-white text-xs">⌂</div><div><div class="text-xs text-zinc-500">آگهی جدید</div><div class="text-sm font-semibold">ویلای لوکس</div></div></div>
+      <div class="absolute bottom-6 left-6 bg-zinc-900 text-white rounded-2xl shadow-xl px-4 py-3" style="animation:float 6s ease-in-out infinite"><div class="text-xs opacity-70">شروع از</div><div class="font-bold">۱,۹۰۰ دلار / ماه</div></div>
+    </div>
+  </div>
+</section>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h2 class="text-2xl font-bold">انواع ملک را کشف کنید</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mt-6">
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">خ</div><div class="mt-2 text-xs font-medium">خانه</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">آ</div><div class="mt-2 text-xs font-medium">آپارتمان</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">و</div><div class="mt-2 text-xs font-medium">ویلا</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">ب</div><div class="mt-2 text-xs font-medium">بنگلو</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">ت</div><div class="mt-2 text-xs font-medium">تاون‌هاوس</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">ل</div><div class="mt-2 text-xs font-medium">لافت</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-900 text-white grid place-items-center text-xs">ا</div><div class="mt-2 text-xs font-medium">اداری</div></a>
+    <a href="properties.html" class="bg-white rounded-2xl border p-6 text-center hover:shadow-md transition"><div class="h-8 w-8 mx-auto rounded-full bg-zinc-200 grid place-items-center text-xs">+</div><div class="mt-2 text-xs font-medium">بیشتر</div></a>
+  </div>
+</section>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="flex items-center justify-between"><h2 class="text-2xl font-bold">املاک ویژه</h2><a href="properties.html" class="text-sm text-violet-600">مشاهده همه ←</a></div>
+  <div class="swiper mt-6 !pb-10"><div id="featuredGrid" class="swiper-wrapper"></div><div class="swiper-pagination"></div></div>
+</section>
+<footer class="bg-zinc-900 text-zinc-400 mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid md:grid-cols-4 gap-8 text-sm">
+    <div><div class="text-white font-semibold mb-3">دریم‌ول</div><p class="leading-6 text-zinc-500">بهترین خانه برای تو</p></div>
+    <div><div class="text-white font-medium mb-3">لینک‌ها</div><ul class="space-y-2"><li>درباره ما</li><li>حریم خصوصی</li></ul></div>
+  </div>
+  <div class="border-t border-zinc-800 text-center py-6 text-xs">© ۲۰۲۴ دریم‌ول</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const s=getSettings();
+  const feat=getProperties().filter(p=>p.featured);
+  document.getElementById('featuredGrid').innerHTML=feat.map(p=>`<div class="swiper-slide"><a href="../property.html?id=${p.id}" class="group bg-white rounded-2xl overflow-hidden border border-zinc-100 hover:shadow-xl transition block"><div class="relative h-52 overflow-hidden"><img src="${p.image}" class="h-full w-full object-cover group-hover:scale-105 transition duration-500"><span class="absolute top-3 right-3 text-xs px-3 py-1 rounded-full font-medium ${p.status==='For Rent'?'bg-emerald-500 text-white':'bg-amber-500 text-white'}">${p.status==='For Rent'?'اجاره':'فروش'}</span></div><div class="p-5"><h3 class="font-semibold line-clamp-1">${p.title}</h3><p class="text-xs text-zinc-500 mt-1 line-clamp-1">${p.location}</p><div class="mt-4 flex items-center justify-between"><span class="font-bold">${p.priceLabel}</span><span class="text-xs text-violet-600 font-medium">مشاهده ←</span></div></div></a></div>`).join('');
+  new Swiper('.swiper',{slidesPerView:1,spaceBetween:16,breakpoints:{640:{slidesPerView:2},1024:{slidesPerView:4}},pagination:{el:'.swiper-pagination',clickable:true},autoplay:{delay:3500,disableOnInteraction:false},loop:true});
+});
+</script>
+<style>@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}</style>
+</body>
+</html>
