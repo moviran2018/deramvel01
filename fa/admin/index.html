@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>پنل مدیریت — دریم‌ول</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&family=Golos+Text:wght@600;700&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{accent:'#19CF79',heading:'#152046',body:'#636363',muted:'#F5F7FA'}}}}</script>
+<style>body{font-family:Vazirmatn,Inter,sans-serif;background:#F5F7FA;color:#636363}</style>
+</head>
+<body class="bg-[#F5F7FA]">
+<header class="bg-white border-b sticky top-0 z-30 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2"><div class="h-8 w-8 rounded-xl bg-accent text-white grid place-items-center font-bold text-sm"><i class="fa-solid fa-house"></i></div><span class="font-semibold text-heading" style="font-family:'Golos Text'">پنل مدیریت دریم‌ول</span><span class="text-xs px-2 py-1 rounded-full bg-accent/10 text-accent">فارسی</span></a>
+    <a href="../index.html" class="text-sm text-body hover:text-accent">← بازگشت به سایت</a>
+  </div>
+</header>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex gap-2">
+    <button data-tab="properties" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-accent text-white">املاک</button>
+    <button data-tab="add" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-white border">افزودن / ویرایش</button>
+    <button data-tab="settings" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-white border">تنظیمات سایت</button>
+    <button data-tab="export" class="tabBtn px-4 py-2 rounded-full text-sm font-medium bg-white border">خروجی</button>
+  </div>
+
+  <div id="tab-properties" class="tabPanel mt-6 bg-white rounded-2xl border overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-zinc-50 text-zinc-500 text-xs"><tr><th class="text-right p-3">عنوان</th><th class="text-right p-3">شهر</th><th class="text-right p-3">قیمت</th><th class="text-right p-3">وضعیت</th><th class="p-3">عملیات</th></tr></thead>
+        <tbody id="propsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-add" class="tabPanel hidden mt-6 bg-white rounded-2xl border p-6 grid md:grid-cols-2 gap-4">
+    <input id="fTitle" placeholder="عنوان" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fCity" placeholder="شهر" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fLocation" placeholder="آدرس کامل" class="rounded-xl border px-3 py-2.5 text-sm md:col-span-2">
+    <input id="fPrice" type="number" placeholder="قیمت" class="rounded-xl border px-3 py-2.5 text-sm">
+    <select id="fStatus" class="rounded-xl border px-3 py-2.5 text-sm"><option>برای اجاره</option><option>برای فروش</option></select>
+    <select id="fType" class="rounded-xl border px-3 py-2.5 text-sm"><option>خانه</option><option>آپارتمان</option><option>ویلا</option><option>تاون‌هاوس</option><option>اداری</option><option>بنگلو</option><option>لافت</option></select>
+    <input id="fBeds" type="number" placeholder="تخت" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fBaths" type="number" placeholder="حمام" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fSqft" type="number" placeholder="متراژ" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fImage" placeholder="آدرس عکس اصلی" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fPanorama" placeholder="آدرس تور ۳۶۰ (پانوراما)" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fVideo" placeholder="آدرس ویدئو (mp4)" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fPodcast" placeholder="آدرس پادکست (mp3)" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fGallery" placeholder="آدرس‌های گالری (با کاما جدا کنید)" class="rounded-xl border px-3 py-2.5 text-sm md:col-span-2">
+    <textarea id="fDesc" placeholder="توضیحات" rows="3" class="rounded-xl border px-3 py-2.5 text-sm md:col-span-2"></textarea>
+    <label class="flex items-center gap-2 text-sm md:col-span-2"><input id="fFeatured" type="checkbox"> ویژه در صفحه اصلی</label>
+    <div class="md:col-span-2 flex gap-2">
+      <button id="saveBtn" class="px-6 py-3 rounded-xl bg-accent text-white font-medium hover:bg-heading transition">ایجاد ملک</button>
+      <button id="cancelBtn" class="px-6 py-3 rounded-xl border hidden">انصراف</button>
+    </div>
+  </div>
+
+  <div id="tab-settings" class="tabPanel hidden mt-6 bg-white rounded-2xl border p-6 space-y-4 max-w-xl">
+    <div><label class="text-xs font-medium">نام سایت</label><input id="sName" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">شعار</label><input id="sTagline" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">ایمیل تماس</label><input id="sEmail" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">تلفن</label><input id="sPhone" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <div><label class="text-xs font-medium">آدرس</label><input id="sAddr" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></div>
+    <button id="saveSettings" class="px-6 py-2.5 rounded-xl bg-zinc-900 text-white text-sm font-medium">ذخیره تنظیمات</button>
+    <p class="text-xs text-zinc-500">ذخیره بلافاصله در کل سایت اعمال می‌شود.</p>
+  </div>
+
+  <div id="tab-export" class="tabPanel hidden mt-6 bg-white rounded-2xl border p-6">
+    <h3 class="font-semibold">خروجی / پشتیبان</h3>
+    <p class="text-sm text-zinc-500 mt-1">تمام داده‌ها در مرورگر ذخیره شده — برای بک‌اند واقعی، این JSON را به Supabase/Workers بفرست.</p>
+    <div class="mt-4 flex gap-2">
+      <button id="exportBtn" class="px-4 py-2 rounded-xl bg-zinc-900 text-white text-sm">دانلود JSON</button>
+      <button id="resetBtn" class="px-4 py-2 rounded-xl border text-sm text-red-600">بازگشت به پیش‌فرض</button>
+    </div>
+    <pre id="exportPreview" class="mt-4 bg-zinc-900 text-zinc-100 rounded-xl p-4 text-xs overflow-auto max-h-64"></pre>
+  </div>
+</div>
+
+<script src="../../assets/app.js"></script>
+<script>
+let editingId=null;
+const els={title:document.getElementById('fTitle'),city:document.getElementById('fCity'),location:document.getElementById('fLocation'),price:document.getElementById('fPrice'),status:document.getElementById('fStatus'),type:document.getElementById('fType'),beds:document.getElementById('fBeds'),baths:document.getElementById('fBaths'),sqft:document.getElementById('fSqft'),image:document.getElementById('fImage'),panorama:document.getElementById('fPanorama'),video:document.getElementById('fVideo'),podcast:document.getElementById('fPodcast'),gallery:document.getElementById('fGallery'),desc:document.getElementById('fDesc'),featured:document.getElementById('fFeatured'),saveBtn:document.getElementById('saveBtn'),cancelBtn:document.getElementById('cancelBtn')};
+
+function renderTable(){
+  const tbody=document.getElementById('propsBody');
+  tbody.innerHTML=getProperties().map(p=>`<tr class="border-t"><td class="p-3 font-medium text-heading">${p.title}</td><td class="p-3">${p.city}</td><td class="p-3">${p.priceLabel}</td><td class="p-3"><span class="text-xs px-2 py-1 rounded-full ${p.status==='For Rent'?'bg-emerald-100 text-emerald-700':'bg-amber-100 text-amber-700'}">${p.status}</span></td><td class="p-3 flex gap-2 justify-center"><button onclick="editProp('${p.id}')" class="px-3 py-1 rounded-full bg-accent text-white text-xs">ویرایش</button><button onclick="delProp('${p.id}')" class="px-3 py-1 rounded-full border text-xs hover:border-accent hover:text-accent">حذف</button></td></tr>`).join('');
+  document.getElementById('exportPreview').textContent=JSON.stringify({settings:getSettings(),properties:getProperties()},null,2);
+}
+function editProp(id){
+  const p=getProperties().find(x=>x.id===id);
+  if(!p) return;
+  editingId=id;
+  els.title.value=p.title; els.city.value=p.city; els.location.value=p.location; els.price.value=p.price; els.status.value=p.status==='For Rent'?'برای اجاره':'برای فروش'; els.type.value=p.type; els.beds.value=p.beds; els.baths.value=p.baths; els.sqft.value=p.sqft; els.image.value=p.image; els.panorama.value=p.panorama||''; els.video.value=p.video||''; els.podcast.value=p.podcast||''; els.gallery.value=(p.gallery||[]).join(', '); els.desc.value=p.description; els.featured.checked=!!p.featured;
+  els.saveBtn.textContent='بروزرسانی ملک'; els.cancelBtn.classList.remove('hidden');
+  switchTab('add');
+}
+function delProp(id){
+  if(!confirm('حذف شود؟')) return;
+  const list=getProperties().filter(x=>x.id!==id);
+  saveProperties(list); renderTable();
+}
+els.saveBtn.addEventListener('click',()=>{
+  if(!els.title.value || !els.location.value) return alert('عنوان و آدرس الزامی است');
+  const gallery = els.gallery.value ? els.gallery.value.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const statusMap = {'برای اجاره':'For Rent','برای فروش':'For Sale'};
+  const status = statusMap[els.status.value] || els.status.value;
+  const typeMap = {'خانه':'House','آپارتمان':'Apartment','ویلا':'Villa','تاون‌هاوس':'Townhouse','اداری':'Office','بنگلو':'Bungalow','لافت':'Loft'};
+  const type = typeMap[els.type.value] || els.type.value;
+  const data={title:els.title.value,city:els.city.value,location:els.location.value,price:Number(els.price.value),status,type,beds:Number(els.beds.value),baths:Number(els.baths.value),sqft:Number(els.sqft.value),image:els.image.value||'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600',panorama:els.panorama.value||undefined,video:els.video.value||undefined,podcast:els.podcast.value||undefined,gallery:gallery.length?gallery:undefined,description:els.desc.value,featured:els.featured.checked,priceLabel:status==='For Rent'?`$${Number(els.price.value).toLocaleString()} /month`:`$${Number(els.price.value).toLocaleString()}`};
+  let list=getProperties();
+  if(editingId){
+    list=list.map(x=>x.id===editingId?{...x,...data,slug:data.title.toLowerCase().replace(/\s+/g,'-')}:x);
+    editingId=null; els.saveBtn.textContent='ایجاد ملک'; els.cancelBtn.classList.add('hidden');
+  } else {
+    const id=Date.now().toString();
+    list=[{id,slug:data.title.toLowerCase().replace(/\s+/g,'-'),...data},...list];
+  }
+  saveProperties(list);
+  els.title.value=''; els.city.value=''; els.location.value=''; els.price.value=''; els.panorama.value=''; els.video.value=''; els.podcast.value=''; els.gallery.value=''; els.desc.value='';
+  renderTable(); switchTab('properties');
+});
+els.cancelBtn.addEventListener('click',()=>{ editingId=null; els.saveBtn.textContent='ایجاد ملک'; els.cancelBtn.classList.add('hidden'); els.title.value=''; });
+
+function switchTab(name){
+  document.querySelectorAll('.tabBtn').forEach(b=>{ b.className=b.dataset.tab===name?'px-4 py-2 rounded-full text-sm font-medium bg-accent text-white':'px-4 py-2 rounded-full text-sm font-medium bg-white border'; });
+  document.querySelectorAll('.tabPanel').forEach(p=>p.classList.toggle('hidden', p.id!==`tab-${name}`));
+}
+document.querySelectorAll('.tabBtn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+function loadSettings(){
+  const s=getSettings();
+  document.getElementById('sName').value=s.siteName;
+  document.getElementById('sTagline').value=s.siteTagline;
+  document.getElementById('sEmail').value=s.contactEmail;
+  document.getElementById('sPhone').value=s.contactPhone;
+  document.getElementById('sAddr').value=s.contactAddress;
+}
+document.getElementById('saveSettings').addEventListener('click',()=>{
+  const s={siteName:document.getElementById('sName').value,siteTagline:document.getElementById('sTagline').value,contactEmail:document.getElementById('sEmail').value,contactPhone:document.getElementById('sPhone').value,contactAddress:document.getElementById('sAddr').value};
+  saveSettings(s); alert('ذخیره شد!');
+});
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify({settings:getSettings(),properties:getProperties()},null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='dreamwell-backup.json'; a.click();
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{ if(confirm('بازگشت به پیش‌فرض؟')){ localStorage.removeItem('dw_props'); localStorage.removeItem('dw_settings'); location.reload(); }});
+
+document.addEventListener('DOMContentLoaded',()=>{ renderTable(); loadSettings(); });
+</script>
+</body>
+</html>
