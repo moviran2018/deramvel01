@@ -42,6 +42,10 @@
     <input id="fBaths" type="number" placeholder="Baths" class="rounded-xl border px-3 py-2.5 text-sm">
     <input id="fSqft" type="number" placeholder="Sqft" class="rounded-xl border px-3 py-2.5 text-sm">
     <input id="fImage" placeholder="Image URL" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fPanorama" placeholder="Panorama 360 URL (equirectangular)" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fVideo" placeholder="Video URL (mp4)" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fPodcast" placeholder="Podcast/Audio URL (mp3)" class="rounded-xl border px-3 py-2.5 text-sm">
+    <input id="fGallery" placeholder="Gallery URLs (comma separated)" class="rounded-xl border px-3 py-2.5 text-sm md:col-span-2">
     <textarea id="fDesc" placeholder="Description" rows="3" class="rounded-xl border px-3 py-2.5 text-sm md:col-span-2"></textarea>
     <label class="flex items-center gap-2 text-sm md:col-span-2"><input id="fFeatured" type="checkbox"> Featured on homepage</label>
     <div class="md:col-span-2 flex gap-2">
@@ -74,7 +78,7 @@
 <script src="../assets/app.js"></script>
 <script>
 let editingId=null;
-const els={title:document.getElementById('fTitle'),city:document.getElementById('fCity'),location:document.getElementById('fLocation'),price:document.getElementById('fPrice'),status:document.getElementById('fStatus'),type:document.getElementById('fType'),beds:document.getElementById('fBeds'),baths:document.getElementById('fBaths'),sqft:document.getElementById('fSqft'),image:document.getElementById('fImage'),desc:document.getElementById('fDesc'),featured:document.getElementById('fFeatured'),saveBtn:document.getElementById('saveBtn'),cancelBtn:document.getElementById('cancelBtn')};
+const els={title:document.getElementById('fTitle'),city:document.getElementById('fCity'),location:document.getElementById('fLocation'),price:document.getElementById('fPrice'),status:document.getElementById('fStatus'),type:document.getElementById('fType'),beds:document.getElementById('fBeds'),baths:document.getElementById('fBaths'),sqft:document.getElementById('fSqft'),image:document.getElementById('fImage'),panorama:document.getElementById('fPanorama'),video:document.getElementById('fVideo'),podcast:document.getElementById('fPodcast'),gallery:document.getElementById('fGallery'),desc:document.getElementById('fDesc'),featured:document.getElementById('fFeatured'),saveBtn:document.getElementById('saveBtn'),cancelBtn:document.getElementById('cancelBtn')};
 
 function renderTable(){
   const tbody=document.getElementById('propsBody');
@@ -85,7 +89,7 @@ function editProp(id){
   const p=getProperties().find(x=>x.id===id);
   if(!p) return;
   editingId=id;
-  els.title.value=p.title; els.city.value=p.city; els.location.value=p.location; els.price.value=p.price; els.status.value=p.status; els.type.value=p.type; els.beds.value=p.beds; els.baths.value=p.baths; els.sqft.value=p.sqft; els.image.value=p.image; els.desc.value=p.description; els.featured.checked=!!p.featured;
+  els.title.value=p.title; els.city.value=p.city; els.location.value=p.location; els.price.value=p.price; els.status.value=p.status; els.type.value=p.type; els.beds.value=p.beds; els.baths.value=p.baths; els.sqft.value=p.sqft; els.image.value=p.image; els.panorama.value=p.panorama||''; els.video.value=p.video||''; els.podcast.value=p.podcast||''; els.gallery.value=(p.gallery||[]).join(', '); els.desc.value=p.description; els.featured.checked=!!p.featured;
   els.saveBtn.textContent='Update Property'; els.cancelBtn.classList.remove('hidden');
   switchTab('add');
 }
@@ -96,7 +100,8 @@ function delProp(id){
 }
 els.saveBtn.addEventListener('click',()=>{
   if(!els.title.value || !els.location.value) return alert('Title and location required');
-  const data={title:els.title.value,city:els.city.value,location:els.location.value,price:Number(els.price.value),status:els.status.value,type:els.type.value,beds:Number(els.beds.value),baths:Number(els.baths.value),sqft:Number(els.sqft.value),image:els.image.value||'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600',description:els.desc.value,featured:els.featured.checked,priceLabel:els.status.value==='For Rent'?`$${Number(els.price.value).toLocaleString()} /month`:`$${Number(els.price.value).toLocaleString()}`};
+  const gallery = els.gallery.value ? els.gallery.value.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const data={title:els.title.value,city:els.city.value,location:els.location.value,price:Number(els.price.value),status:els.status.value,type:els.type.value,beds:Number(els.beds.value),baths:Number(els.baths.value),sqft:Number(els.sqft.value),image:els.image.value||'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600',panorama:els.panorama.value||undefined,video:els.video.value||undefined,podcast:els.podcast.value||undefined,gallery:gallery.length?gallery:undefined,description:els.desc.value,featured:els.featured.checked,priceLabel:els.status.value==='For Rent'?`$${Number(els.price.value).toLocaleString()} /month`:`$${Number(els.price.value).toLocaleString()}`};
   let list=getProperties();
   if(editingId){
     list=list.map(x=>x.id===editingId?{...x,...data,slug:data.title.toLowerCase().replace(/\s+/g,'-')}:x);
@@ -106,7 +111,7 @@ els.saveBtn.addEventListener('click',()=>{
     list=[{id,slug:data.title.toLowerCase().replace(/\s+/g,'-'),...data},...list];
   }
   saveProperties(list);
-  els.title.value=''; els.city.value=''; els.location.value=''; els.price.value=''; els.desc.value='';
+  els.title.value=''; els.city.value=''; els.location.value=''; els.price.value=''; els.panorama.value=''; els.video.value=''; els.podcast.value=''; els.gallery.value=''; els.desc.value='';
   renderTable(); switchTab('properties');
 });
 els.cancelBtn.addEventListener('click',()=>{ editingId=null; els.saveBtn.textContent='Create Property'; els.cancelBtn.classList.add('hidden'); els.title.value=''; });
